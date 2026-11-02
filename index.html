@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>హిందీ గుణింతాలు & పదాలు - చిన్నారుల అభ్యాసం (Hindi Guninthalu in Telugu)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Telugu, Hindi (Devanagari), and English -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@500;700;800&family=Noto+Sans+Telugu:wght@400;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Noto Sans Telugu', 'Fredoka', sans-serif;
+            background: linear-gradient(135deg, #FEF9C3 0%, #DBEAFE 50%, #FCE7F3 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            user-select: none;
+        }
+        .hindi-font {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+        }
+        .fun-shadow {
+            box-shadow: 0 6px 0px rgba(0, 0, 0, 0.15);
+        }
+        .fun-shadow-sm {
+            box-shadow: 0 4px 0px rgba(0, 0, 0, 0.12);
+        }
+        .btn-bounce:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px rgba(0, 0, 0, 0.15);
+        }
+        /* Memory Card Flip CSS */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        /* Custom Scrollbar for Question Jumper */
+        .custom-scroll::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #f59e0b;
+            border-radius: 10px;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: popIn 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="text-slate-800 pb-12">
+
+    <!-- TOP HEADER & STUDENT BAR -->
+    <header class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-5xl mx-auto px-3 py-2.5 flex flex-wrap items-center justify-between gap-2">
+            <!-- App Title -->
+            <div class="flex items-center gap-2.5">
+                <div class="w-11 h-11 rounded-2xl bg-yellow-300 text-indigo-900 flex items-center justify-center font-extrabold text-2xl hindi-font fun-shadow-sm">
+                    क+ा
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-extrabold tracking-wide leading-tight flex items-center gap-1.5">
+                        <span>హిందీ గుణింతాలు & పదాలు</span>
+                        <span class="bg-yellow-300 text-indigo-950 text-xs px-2 py-0.5 rounded-full font-bold">260+ Qs</span>
+                    </h1>
+                    <p class="text-xs text-yellow-100 font-medium">చిన్నారుల కోసం తెలుగులో పూర్తి వివరణతో (Barakhadi & Basic Words)</p>
+                </div>
+            </div>
+
+            <!-- Live Timer & Finish Button -->
+            <div class="flex items-center gap-2 ml-auto">
+                <div class="bg-white/20 backdrop-blur-md border border-white/30 px-3 py-1.5 rounded-2xl flex items-center gap-2">
+                    <i class="fa-solid fa-clock text-yellow-300 animate-pulse"></i>
+                    <div>
+                        <div class="text-[10px] uppercase tracking-wider text-yellow-100 leading-none">సమయం (Time)</div>
+                        <div id="liveTimerDisplay" class="font-mono font-extrabold text-sm sm:text-base leading-tight">00:00:00</div>
+                    </div>
+                </div>
+                <button onclick="switchTab('results')" class="bg-emerald-400 hover:bg-emerald-300 text-slate-900 font-extrabold text-xs sm:text-sm px-3.5 py-2 rounded-2xl fun-shadow-sm btn-bounce flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-flag-checkered"></i>
+                    <span>ఫలితాలు & పంపు (Submit)</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- LIVE SCORE & STATS STRIP -->
+        <div class="bg-indigo-950/80 backdrop-blur text-white py-1.5 px-3 border-t border-white/15">
+            <div class="max-w-5xl mx-auto grid grid-cols-4 gap-1.5 text-center text-xs sm:text-sm">
+                <div class="bg-indigo-800/70 rounded-xl py-1 px-2 flex flex-col sm:flex-row items-center justify-center sm:gap-1.5">
+                    <span class="text-indigo-200 text-[11px]">మొత్తం (Total):</span>
+                    <span id="statTotal" class="font-extrabold text-yellow-300 text-sm sm:text-base">260</span>
+                </div>
+                <div class="bg-blue-800/70 rounded-xl py-1 px-2 flex flex-col sm:flex-row items-center justify-center sm:gap-1.5">
+                    <span class="text-blue-200 text-[11px]">ప్రయత్నించినవి (Attempted):</span>
+                    <span id="statAttempted" class="font-extrabold text-cyan-300 text-sm sm:text-base">0</span>
+                </div>
+                <div class="bg-amber-800/70 rounded-xl py-1 px-2 flex flex-col sm:flex-row items-center justify-center sm:gap-1.5">
+                    <span class="text-amber-200 text-[11px]">మిగిలినవి (Not Attempted):</span>
+                    <span id="statUnattempted" class="font-extrabold text-amber-300 text-sm sm:text-base">260</span>
+                </div>
+                <div class="bg-emerald-800/70 rounded-xl py-1 px-2 flex flex-col sm:flex-row items-center justify-center sm:gap-1.5">
+                    <span class="text-emerald-200 text-[11px]">సరైనవి (Correct):</span>
+                    <span id="statCorrect" class="font-extrabold text-emerald-300 text-sm sm:text-base">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-5xl mx-auto px-3 pt-4">
+
+        <!-- STUDENT NAME & JUMBLE BANNER -->
+        <div class="bg-white rounded-3xl p-3.5 mb-4 border-4 border-amber-300 fun-shadow flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5 w-full sm:w-auto">
+                <span class="text-2xl">👧👦</span>
+                <div class="flex-1">
+                    <label for="studentNameInput" class="block text-xs font-bold text-slate-500">విద్యార్థి పేరు (Student Name):</label>
+                    <input id="studentNameInput" type="text" placeholder="మీ పేరు ఇక్కడ రాయండి..." class="w-full sm:w-64 font-bold text-indigo-900 bg-amber-50 border-2 border-amber-300 rounded-xl px-3 py-1 text-sm focus:outline-none focus:border-indigo-500">
+                </div>
+            </div>
+            <div class="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+                <span class="text-xs bg-purple-100 text-purple-800 font-bold px-3 py-1.5 rounded-xl border border-purple-200">
+                    <i class="fa-solid fa-shuffle mr-1"></i>ప్రశ్నలు తారుమారు చేయబడ్డాయి (Jumbled!)
+                </span>
+                <button onclick="openChartModal()" class="bg-pink-500 hover:bg-pink-600 text-white text-xs font-extrabold px-3 py-2 rounded-xl fun-shadow-sm btn-bounce flex items-center gap-1">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>గుణింతాల పట్టిక (Chart)</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- MODE NAVIGATION TABS -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-5">
+            <button id="tabBtn-quiz" onclick="switchTab('quiz')" class="tab-btn bg-indigo-600 text-white font-extrabold py-3 px-3 rounded-2xl fun-shadow btn-bounce flex items-center justify-center gap-2 border-2 border-indigo-700 text-sm sm:text-base">
+                <span class="text-xl">📝</span>
+                <div class="text-left leading-tight">
+                    <div>1. గుణింతాల క్విజ్</div>
+                    <div class="text-[11px] font-normal opacity-90">260+ MCQs (Quiz)</div>
+                </div>
+            </button>
+            <button id="tabBtn-memory" onclick="switchTab('memory')" class="tab-btn bg-white text-slate-700 hover:bg-amber-50 font-extrabold py-3 px-3 rounded-2xl fun-shadow btn-bounce flex items-center justify-center gap-2 border-2 border-slate-200 text-sm sm:text-base">
+                <span class="text-xl">🃏</span>
+                <div class="text-left leading-tight">
+                    <div>2. మెమరీ గేమ్</div>
+                    <div class="text-[11px] font-normal opacity-75">Memory Cards</div>
+                </div>
+            </button>
+            <button id="tabBtn-match" onclick="switchTab('match')" class="tab-btn bg-white text-slate-700 hover:bg-amber-50 font-extrabold py-3 px-3 rounded-2xl fun-shadow btn-bounce flex items-center justify-center gap-2 border-2 border-slate-200 text-sm sm:text-base">
+                <span class="text-xl">🔗</span>
+                <div class="text-left leading-tight">
+                    <div>3. జతపరచండి</div>
+                    <div class="text-[11px] font-normal opacity-75">Match Following</div>
+                </div>
+            </button>
+            <button id="tabBtn-results" onclick="switchTab('results')" class="tab-btn bg-white text-slate-700 hover:bg-amber-50 font-extrabold py-3 px-3 rounded-2xl fun-shadow btn-bounce flex items-center justify-center gap-2 border-2 border-slate-200 text-sm sm:text-base">
+                <span class="text-xl">🏆</span>
+                <div class="text-left leading-tight">
+                    <div>4. ఫలితాలు & Email</div>
+                    <div class="text-[11px] font-normal opacity-75">Results & Send</div>
+                </div>
+            </button>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SECTION 1: 260+ QUESTIONS QUIZ MODE        -->
+        <!-- ========================================== -->
+        <section id="section-quiz" class="space-y-4">
+            <!-- Progress & Question Number Jumper Bar -->
+            <div class="bg-white rounded-3xl p-4 border-4 border-indigo-200 fun-shadow">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                    <div class="flex items-center gap-2">
+                        <span id="qBadgeNumber" class="bg-indigo-600 text-white font-extrabold px-3.5 py-1 rounded-xl text-sm sm:text-base">
+                            ప్రశ్న 1 / 260
+                        </span>
+                        <span id="qCategoryBadge" class="bg-amber-100 text-amber-900 font-bold px-3 py-1 rounded-xl text-xs border border-amber-300">
+                            గుణింతాలు (Barakhadi)
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span id="qAttemptStatusBadge" class="text-xs font-extrabold px-3 py-1 rounded-full bg-slate-100 text-slate-600">
+                            <i class="fa-solid fa-lock-open mr-1"></i>ఒకసారి మాత్రమే అవకాశం (1 Attempt Only)
+                        </span>
+                        <button onclick="toggleQuestionPalette()" class="bg-indigo-100 hover:bg-indigo-200 text-indigo-800 font-bold text-xs px-3 py-1.5 rounded-xl transition">
+                            <i class="fa-solid fa-grip mr-1"></i>ప్రశ్నల జాబితా (All 260)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200">
+                    <div id="quizProgressBar" class="bg-gradient-to-r from-green-400 to-emerald-600 h-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+
+                <!-- Collapsible Question Palette (1 to 260) -->
+                <div id="questionPaletteContainer" class="hidden mt-3 pt-3 border-t border-slate-200">
+                    <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+                        <span>ఏ ప్రశ్నకైనా వెళ్ళడానికి ఆ నంబర్ మీద నొక్కండి:</span>
+                        <div class="flex items-center gap-3 font-bold">
+                            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-emerald-500 inline-block"></span> సరైనది</span>
+                            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-rose-500 inline-block"></span> తప్పు</span>
+                            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-slate-200 inline-block"></span> చేయనిది</span>
+                        </div>
+                    </div>
+                    <div id="questionPaletteGrid" class="grid grid-cols-8 sm:grid-cols-13 md:grid-cols-20 gap-1.5 max-h-48 overflow-y-auto custom-scroll p-1">
+                        <!-- Dynamically populated buttons 1..260 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAIN QUESTION CARD -->
+            <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-indigo-400 fun-shadow relative overflow-hidden">
+                <!-- Decorative Corner Ribbon -->
+                <div class="absolute -top-6 -right-6 w-20 h-20 bg-yellow-300 rounded-full opacity-40 pointer-events-none"></div>
+
+                <!-- Big Visual Display Box -->
+                <div class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 border-2 border-indigo-200 rounded-3xl p-4 sm:p-6 mb-5 text-center">
+                    <div id="qVisualHint" class="text-xs sm:text-sm font-bold text-indigo-600 uppercase tracking-wider mb-1">
+                        సరైన సమాధానాన్ని ఎంచుకోండి (Choose the right answer)
+                    </div>
+                    <div id="qBigSymbol" class="hindi-font text-4xl sm:text-6xl font-extrabold text-indigo-950 my-2 py-1 tracking-wide select-text">
+                        क + ा = ?
+                    </div>
+                    <h2 id="qPromptTelugu" class="text-lg sm:text-2xl font-extrabold text-slate-800 leading-snug mt-2">
+                        ప్రశ్న లోడ్ అవుతోంది...
+                    </h2>
+                </div>
+
+                <!-- 4 Options Grid -->
+                <div id="optionsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-5">
+                    <!-- Option buttons injected via JS -->
+                </div>
+
+                <!-- PREV / NEXT NAVIGATION BUTTONS (Always prominent & mobile friendly) -->
+                <div class="flex items-center justify-between gap-3 pt-3 border-t-2 border-slate-100">
+                    <button id="btnPrevQ" onclick="navigateQuestion(-1)" class="flex-1 sm:flex-initial bg-amber-400 hover:bg-amber-500 disabled:opacity-40 disabled:pointer-events-none text-slate-900 font-extrabold py-3.5 px-6 rounded-2xl fun-shadow btn-bounce flex items-center justify-center gap-2 text-base sm:text-lg">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>వెనుకకు (Back)</span>
+                    </button>
+
+                    <div class="hidden sm:flex flex-col items-center text-xs text-slate-500 font-bold">
+                        <span>ప్రతి ప్రశ్నకు ఒకే అవకాశం!</span>
+                        <span>ఆప్షన్ నొక్కిన వెంటనే తెలుగు వివరణ వస్తుంది</span>
+                    </div>
+
+                    <button id="btnNextQ" onclick="navigateQuestion(1)" class="flex-1 sm:flex-initial bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold py-3.5 px-6 rounded-2xl fun-shadow btn-bounce flex items-center justify-center gap-2 text-base sm:text-lg">
+                        <span>తరువాత (Next)</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- LONG TELUGU EXPLANATION BOX (Appears immediately after attempting the question) -->
+                <div id="explanationBox" class="hidden mt-6 rounded-3xl p-5 sm:p-6 border-4 animate-pop">
+                    <div class="flex items-start gap-3 mb-3">
+                        <div id="expStatusIcon" class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shrink-0 font-bold">
+                            🎉
+                        </div>
+                        <div>
+                            <h3 id="expStatusTitle" class="text-lg sm:text-xl font-extrabold">
+                                అద్భుతం! సరైన సమాధానం!
+                            </h3>
+                            <p id="expCorrectAnswerLine" class="text-sm sm:text-base font-bold mt-0.5"></p>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Step-by-Step Child-Friendly Telugu Explanation -->
+                    <div class="bg-white/90 rounded-2xl p-4 border-2 border-indigo-200 space-y-3 text-slate-800">
+                        <div class="flex items-center gap-2 text-indigo-800 font-extrabold text-sm sm:text-base border-b border-indigo-100 pb-2">
+                            <i class="fa-solid fa-graduation-cap text-lg text-pink-600"></i>
+                            <span>పిల్లల కోసం సులభమైన తెలుగు వివరణ (Detailed Telugu Explanation):</span>
+                        </div>
+
+                        <!-- Step Breakdown Cards -->
+                        <div id="expFormulaCards" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-center">
+                            <!-- Dynamically populated formula cards -->
+                        </div>
+
+                        <!-- Long Paragraph Explanation in Telugu -->
+                        <div id="expLongTextTelugu" class="text-sm sm:text-base leading-relaxed font-medium text-slate-800 space-y-2 bg-amber-50/70 p-3.5 rounded-xl border border-amber-200">
+                            <!-- Rich Telugu paragraph -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECTION 2: MEMORY CARD FLIP GAME           -->
+        <!-- ========================================== -->
+        <section id="section-memory" class="hidden space-y-4">
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-pink-400 fun-shadow">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-pink-700 flex items-center gap-2">
+                            <span>🃏 హిందీ గుణింతాల మెమరీ గేమ్ (Memory Game)</span>
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-600 font-medium mt-0.5">
+                            కార్డులను తిప్పి, హిందీ అక్షరం/పదాన్ని దాని సరైన తెలుగు ఉచ్చారణతో జత చేయండి!
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="bg-pink-100 text-pink-900 px-3 py-1.5 rounded-xl font-extrabold text-xs sm:text-sm">
+                            జతలు (Pairs): <span id="memMatchesCount">0</span> / 6
+                        </div>
+                        <div class="bg-indigo-100 text-indigo-900 px-3 py-1.5 rounded-xl font-extrabold text-xs sm:text-sm">
+                            ప్రయత్నాలు (Moves): <span id="memMovesCount">0</span>
+                        </div>
+                        <button onclick="initMemoryGame()" class="bg-pink-600 hover:bg-pink-700 text-white font-extrabold px-4 py-2 rounded-xl text-xs sm:text-sm fun-shadow-sm btn-bounce">
+                            <i class="fa-solid fa-rotate mr-1"></i>కొత్త ఆట (New Cards)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Memory Grid (12 cards = 6 pairs) -->
+                <div id="memoryGrid" class="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4 my-4">
+                    <!-- Injected via JS -->
+                </div>
+
+                <!-- Memory Win Banner -->
+                <div id="memoryWinBanner" class="hidden bg-emerald-100 border-4 border-emerald-400 rounded-2xl p-4 text-center animate-pop mt-4">
+                    <div class="text-3xl mb-1">🌟🎉🏆</div>
+                    <h3 class="text-lg sm:text-xl font-extrabold text-emerald-900">శభాష్! మీరు అన్ని కార్డులను సరిగ్గా జత చేశారు!</h3>
+                    <p id="memoryWinExplanation" class="text-sm text-emerald-800 font-medium mt-1">మరో రౌండ్ ఆడటానికి 'కొత్త ఆట' బటన్ నొక్కండి.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECTION 3: MATCH THE FOLLOWING GAME        -->
+        <!-- ========================================== -->
+        <section id="section-match" class="hidden space-y-4">
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-emerald-400 fun-shadow">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-emerald-700 flex items-center gap-2">
+                            <span>🔗 జతపరచండి (Match the Following Game)</span>
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-600 font-medium mt-0.5">
+                            మొదట ఎడమ వైపున్న <b>హిందీ గుణింతం / పదం</b> పై నొక్కి, ఆపై కుడి వైపున్న సరైన <b>తెలుగు అర్థం / ఉచ్చారణ</b> పై నొక్కండి!
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="bg-emerald-100 text-emerald-900 px-3 py-1.5 rounded-xl font-extrabold text-xs sm:text-sm">
+                            స్కోరు (Matched): <span id="matchScoreCount">0</span> / 6
+                        </div>
+                        <div class="bg-amber-100 text-amber-900 px-3 py-1.5 rounded-xl font-extrabold text-xs sm:text-sm">
+                            రౌండ్లు (Rounds Won): <span id="matchRoundsWon">0</span>
+                        </div>
+                        <button onclick="initMatchGame()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-4 py-2 rounded-xl text-xs sm:text-sm fun-shadow-sm btn-bounce">
+                            <i class="fa-solid fa-shuffle mr-1"></i>కొత్త పదాలు (New Round)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Match Columns -->
+                <div class="grid grid-cols-2 gap-3 sm:gap-6 my-4">
+                    <div>
+                        <div class="text-center font-extrabold text-indigo-800 bg-indigo-100 py-2 rounded-xl mb-2.5 text-xs sm:text-sm">
+                            హిందీ (Hindi Gunintham / Word)
+                        </div>
+                        <div id="matchLeftCol" class="space-y-2.5"></div>
+                    </div>
+                    <div>
+                        <div class="text-center font-extrabold text-pink-800 bg-pink-100 py-2 rounded-xl mb-2.5 text-xs sm:text-sm">
+                            తెలుగు వివరణ (Telugu Meaning)
+                        </div>
+                        <div id="matchRightCol" class="space-y-2.5"></div>
+                    </div>
+                </div>
+
+                <!-- Live Telugu Feedback Box for Match Game -->
+                <div id="matchFeedbackBox" class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-3.5 text-center text-sm sm:text-base font-bold text-slate-700">
+                    👆 జత చేయడానికి ఎడమ వైపు ఒక కార్డును, కుడి వైపు ఒక కార్డును ఎంచుకోండి!
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECTION 4: RESULTS & FORMSPREE SUBMISSION  -->
+        <!-- ========================================== -->
+        <section id="section-results" class="hidden space-y-5">
+            <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-amber-400 fun-shadow">
+                <div class="text-center mb-6">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-yellow-300 text-4xl mb-2 fun-shadow-sm">
+                        🏆
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-indigo-950">
+                        విద్యార్థి ప్రోగ్రెస్ రిపోర్ట్ (Final Results)
+                    </h2>
+                    <p class="text-sm text-slate-600 font-medium mt-1">
+                        మీరు చేసిన అభ్యాసం యొక్క పూర్తి వివరాలు క్రింద చూడండి మరియు ఇమెయిల్‌కు పంపండి.
+                    </p>
+                </div>
+
+                <!-- Detailed Stats Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3.5 mb-6">
+                    <div class="bg-indigo-50 border-2 border-indigo-200 rounded-2xl p-4 text-center">
+                        <div class="text-xs font-bold text-indigo-600 uppercase">మొత్తం ప్రశ్నలు (Total Qs)</div>
+                        <div id="resTotalQs" class="text-2xl sm:text-3xl font-extrabold text-indigo-950 mt-1">260</div>
+                    </div>
+                    <div class="bg-blue-50 border-2 border-blue-200 rounded-2xl p-4 text-center">
+                        <div class="text-xs font-bold text-blue-600 uppercase">ప్రయత్నించినవి (Attempted)</div>
+                        <div id="resAttempted" class="text-2xl sm:text-3xl font-extrabold text-blue-900 mt-1">0</div>
+                    </div>
+                    <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-4 text-center">
+                        <div class="text-xs font-bold text-amber-700 uppercase">చేయనివి (Not Attempted)</div>
+                        <div id="resNotAttempted" class="text-2xl sm:text-3xl font-extrabold text-amber-900 mt-1">260</div>
+                    </div>
+                    <div class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-4 text-center">
+                        <div class="text-xs font-bold text-emerald-700 uppercase">సరైన సమాధానాలు (Correct)</div>
+                        <div id="resCorrect" class="text-2xl sm:text-3xl font-extrabold text-emerald-900 mt-1">0</div>
+                    </div>
+                    <div class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-4 text-center">
+                        <div class="text-xs font-bold text-rose-700 uppercase">తప్పు సమాధానాలు (Wrong)</div>
+                        <div id="resWrong" class="text-2xl sm:text-3xl font-extrabold text-rose-900 mt-1">0</div>
+                    </div>
+                    <div class="bg-purple-50 border-2 border-purple-200 rounded-2xl p-4 text-center">
+                        <div class="text-xs font-bold text-purple-700 uppercase">స్క్రీన్ సమయం (Screen Time)</div>
+                        <div id="resScreenTime" class="text-xl sm:text-2xl font-mono font-extrabold text-purple-900 mt-1">00:00:00</div>
+                    </div>
+                </div>
+
+                <!-- Mini Games Summary -->
+                <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 mb-6 flex flex-wrap items-center justify-around gap-3 text-sm font-bold text-slate-700">
+                    <div>🃏 మెమరీ గేమ్ పూర్తి చేసిన జతలు: <span id="resMemoryScore" class="text-pink-600 font-extrabold">0</span></div>
+                    <div>🔗 జతపరచుట గేమ్ పాయింట్లు: <span id="resMatchScore" class="text-emerald-600 font-extrabold">0</span></div>
+                    <div>🎯 ఖచ్చితత్వం (Accuracy): <span id="resAccuracy" class="text-indigo-600 font-extrabold">0%</span></div>
+                </div>
+
+                <!-- FORMSPREE & EMAIL SUBMISSION BOX -->
+                <div class="bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 border-2 border-indigo-300 rounded-3xl p-5 text-center space-y-4">
+                    <div class="text-sm sm:text-base font-bold text-indigo-950">
+                        <i class="fa-solid fa-envelope-circle-check text-indigo-600 mr-1"></i>
+                        ఈ ఫలితాలను <b>balaswamysm@gmail.com</b> కు మరియు Formspree (<code>https://formspree.io/f/xqppgkaw</code>) కు పంపండి:
+                    </div>
+
+                    <div id="formspreeStatusBanner" class="hidden rounded-2xl p-3.5 text-sm font-extrabold"></div>
+
+                    <div class="flex flex-wrap items-center justify-center gap-3">
+                        <button id="btnSendFormspree" onclick="submitResultsToFormspree(false)" class="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-3.5 px-6 rounded-2xl fun-shadow btn-bounce flex items-center gap-2 text-base">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>ఇప్పుడే ఫలితాలు పంపండి (Send Results Now)</span>
+                        </button>
+
+                        <button onclick="sendDirectMailtoFallback()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold py-3.5 px-5 rounded-2xl fun-shadow btn-bounce flex items-center gap-2 text-sm sm:text-base">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>Direct Email (balaswamysm@gmail.com)</span>
+                        </button>
+                    </div>
+                    <p class="text-xs text-slate-500">
+                        గమనిక: మీరు ఈ పేజీకి వచ్చిన వెంటనే ఆటోమేటిక్‌గా కూడా Formspree ద్వారా రిపోర్ట్ సేవ్ చేయబడుతుంది.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- MODAL: GUNINTHALU REFERENCE CHART          -->
+    <!-- ========================================== -->
+    <div id="chartModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
+        <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col border-4 border-pink-400 fun-shadow overflow-hidden animate-pop">
+            <div class="bg-gradient-to-r from-pink-500 to-indigo-600 text-white px-5 py-3.5 flex items-center justify-between">
+                <h3 class="text-lg sm:text-xl font-extrabold flex items-center gap-2">
+                    <i class="fa-solid fa-table"></i>
+                    <span>హిందీ గుణింతాల గుర్తులు (Hindi Matras / Barakhadi Guide in Telugu)</span>
+                </h3>
+                <button onclick="closeChartModal()" class="w-9 h-9 rounded-xl bg-white/20 hover:bg-white/30 flex items-center justify-center font-bold text-lg">
+                    ✕
+                </button>
+            </div>
+            <div class="p-4 sm:p-6 overflow-y-auto space-y-4 text-sm">
+                <p class="font-bold text-slate-700 bg-amber-50 border border-amber-200 p-3 rounded-xl">
+                    💡 <b>చిన్నారులూ!</b> తెలుగులో మనం తలకట్టు, దీర్ఘం, గుడి, గుడి దీర్ఘం, కొమ్ము... ఎలా రాస్తామో, హిందీలో కూడా అచ్చుల గుర్తులను <b>"మాత్రా (मात्रा)"</b> అంటారు. ఉదాహరణకు <b>क (క)</b> అక్షరానికి గుణింతాలు ఎలా వస్తాయో చూడండి:
+                </p>
+                <div id="chartModalGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- APPLICATION JAVASCRIPT -->
+    <script>
+        /********************************************************************
+         * 1. RICH KNOWLEDGE BASE FOR HINDI GUNINTHALU & BASIC WORDS
+         *    Generates 260+ accurate, non-repetitive, pedagogical questions
+         *    with deep Telugu child-friendly explanations.
+         ********************************************************************/
+
+        // 12 Standard Barakhadi Matras with detailed Telugu grammatical names & teaching notes
+        const MATRAS = [
+            {
+                id: 'a', vowelHi: 'अ', matraHi: '', matraDisplay: '— (తలకట్టు / అ-కారం)',
+                teluguVowel: 'అ', teluguSignName: 'తలకట్టు (అ-కార శబ్దం)',
+                combineRuleTe: 'హిందీలో ఏదైనా హల్లులో సహజంగానే "అ (अ)" శబ్దం దాగి ఉంటుంది. దీనికి ప్రత్యేక గుర్తు ఉండదు.',
+                modFn: (cTe) => cTe.base
+            },
+            {
+                id: 'aa', vowelHi: 'आ', matraHi: 'ा', matraDisplay: 'ा (आ की मात्रा - దీర్ఘం)',
+                teluguVowel: 'ఆ', teluguSignName: 'దీర్ఘం (ా)',
+                combineRuleTe: 'అక్షరం కుడి వైపున ఒక నిలువు గీత (ा) పెడితే తెలుగులో "దీర్ఘం" లాగా "ఆ" శబ్దం వస్తుంది.',
+                modFn: (cTe) => cTe.aa
+            },
+            {
+                id: 'i', vowelHi: 'इ', matraHi: 'ि', matraDisplay: 'ि (इ की मात्रा - గుడి)',
+                teluguVowel: 'ఇ', teluguSignName: 'గుడి (ి)',
+                combineRuleTe: 'అక్షరానికి ఎడమ వైపు నుండి పైకి వంపు తిరిగే గీత (ि) పెడితే తెలుగులో "గుడి" లాగా హ్రస్వ "ఇ" శబ్దం వస్తుంది.',
+                modFn: (cTe) => cTe.i
+            },
+            {
+                id: 'ii', vowelHi: 'ई', matraHi: 'ी', matraDisplay: 'ी (ई की मात्रा - గుడి దీర్ఘం)',
+                teluguVowel: 'ఈ', teluguSignName: 'గుడి దీర్ఘం (ీ)',
+                combineRuleTe: 'అక్షరానికి కుడి వైపున పైనుండి వంపు తిరిగే గీత (ी) పెడితే తెలుగులో "గుడి దీర్ఘం" లాగా సాగదీసే "ఈ" శబ్దం వస్తుంది.',
+                modFn: (cTe) => cTe.ii
+            },
+            {
+                id: 'u', vowelHi: 'उ', matraHi: 'ु', matraDisplay: 'ु (उ की मात्रा - కొమ్ము)',
+                teluguVowel: 'ఉ', teluguSignName: 'కొమ్ము (ు)',
+                combineRuleTe: 'అక్షరం క్రింద చిన్న చుట్ట/వంపు ఎడమవైపు తిరిగి ఉంటే (ु) తెలుగులో "కొమ్ము" లాగా చిన్న "ఉ" శబ్దం వస్తుంది.',
+                modFn: (cTe) => cTe.u
+            },
+            {
+                id: 'uu', vowelHi: 'ऊ', matraHi: 'ू', matraDisplay: 'ू (ऊ की मात्रा - కొమ్ము దీర్ఘం)',
+                teluguVowel: 'ఊ', teluguSignName: 'కొమ్ము దీర్ఘం (ూ)',
+                combineRuleTe: 'అక్షరం క్రింద కుడివైపుకు వంగిన గుర్తు (ू) పెడితే తెలుగులో "కొమ్ము దీర్ఘం" లాగా "ఊ" అనే దీర్ఘ శబ్దం వస్తుంది.',
+                modFn: (cTe) => cTe.uu
+            },
+            {
+                id: 'ri', vowelHi: 'ऋ', matraHi: 'ृ', matraDisplay: 'ृ (ऋ की मात्रा - సుడి / ృ)',
+                teluguVowel: 'ఋ', teluguSignName: 'వట్రుసుడి (ృ)',
+                combineRuleTe: 'అక్షరం క్రింద ఇంగ్లీష్ అక్షరం c లాంటి చిన్న వంపు (ृ) పెడితే తెలుగులో "వట్రుసుడి (ృ)" శబ్దం వస్తుంది.',
+                modFn: (cTe) => cTe.ri
+            },
+            {
+                id: 'e', vowelHi: 'ए', matraHi: 'े', matraDisplay: 'े (ए की मात्रा - ఎత్వం/ఏత్వం)',
+                teluguVowel: 'ఏ', teluguSignName: 'ఏత్వం (ే)',
+                combineRuleTe: 'అక్షరం తలపైన ఒక ఏటవాలు గీత (े) పెడితే తెలుగులో "ఏత్వం" లాగా "ఏ" శబ్దం వస్తుంది.',
+                modFn: (cTe) => cTe.e
+            },
+            {
+                id: 'ai', vowelHi: 'ऐ', matraHi: 'ै', matraDisplay: 'ै (ऐ की मात्रा - ఐత్వం)',
+                teluguVowel: 'ఐ', teluguSignName: 'ఐత్వం (ై)',
+                combineRuleTe: 'అక్షరం తలపైన రెండు ఏటవాలు గీతలు (ै) పెడితే తెలుగులో "ఐత్వం" లాగా "ఐ" శబ్దం వస్తుంది.',
+                modFn: (cTe) => cTe.ai
+            },
+            {
+                id: 'o', vowelHi: 'ओ', matraHi: 'ो', matraDisplay: 'ो (ओ की मात्रा - ఓత్వం)',
+                teluguVowel: 'ఓ', teluguSignName: 'ఓత్వం (ో)',
+                combineRuleTe: 'అక్షరం పక్కన ఒక నిలువు గీత మరియు పైన ఒక కొమ్ము గీత (ो) పెడితే తెలుగులో "ఓత్వం" లాగా "ఓ" శబ్దం వస్తుంది.',
+                modFn: (cTe) => cTe.o
+            },
+            {
+                id: 'au', vowelHi: 'औ', matraHi: 'ौ', matraDisplay: 'ौ (औ की मात्रा - ఔత్వం)',
+                teluguVowel: 'ఔ', teluguSignName: 'ఔత్వం (ౌ)',
+                combineRuleTe: 'అక్షరం పక్కన ఒక నిలువు గీత మరియు పైన రెండు కొమ్ము గీతలు (ौ) పెడితే తెలుగులో "ఔత్వం" లాగా "ఔ" శబ్దం వస్తుంది.',
+                modFn: (cTe) => cTe.au
+            },
+            {
+                id: 'am', vowelHi: 'अं', matraHi: 'ं', matraDisplay: 'ं (अं की बिंदी - సున్నా)',
+                teluguVowel: 'అం', teluguSignName: 'సున్నా / అనుస్వారం (ం)',
+                combineRuleTe: 'అక్షరం పైన ఒక చుక్క (ं - బిందీ) పెడితే తెలుగులో పక్కన "సున్నా (ం)" పెట్టినట్లుగా "అం" శబ్దం వస్తుంది.',
+                modFn: (cTe) => cTe.am
+            },
+            {
+                id: 'aha', vowelHi: 'अः', matraHi: 'ः', matraDisplay: 'ः (अः विसर्ग - విసర్గ)',
+                teluguVowel: 'అః', teluguSignName: 'విసర్గ (ః)',
+                combineRuleTe: 'అక్షరం కుడి వైపున నిలువుగా రెండు చుక్కలు (ः) పెడితే తెలుగులో "విసర్గ (ః)" లాగా "అః" శబ్దం వస్తుంది.',
+                modFn: (cTe) => cTe.aha
+            }
+        ];
+
+        // Helper function to generate Telugu Gunintham forms cleanly from a base Telugu consonant
+        function makeTeluguForms(teBase) {
+            return {
+                base: teBase,
+                aa: teBase + 'ా',
+                i: teBase + 'ి',
+                ii: teBase + 'ీ',
+                u: teBase + 'ు',
+                uu: teBase + 'ూ',
+                ri: teBase + 'ృ',
+                e: teBase + 'ే',
+                ai: teBase + 'ై',
+                o: teBase + 'ో',
+                au: teBase + 'ౌ',
+                am: teBase + 'ం',
+                aha: teBase + 'ః'
+            };
+        }
+
+        // Consonants क to ह for full Barakhadi coverage
+        const CONSONANTS = [
+            { hi: 'क', te: 'క', group: 'క-వర్గం (क-वर्ग)', sampleWord: 'कमल (కమల్ - తామరపువ్వు)' },
+            { hi: 'ख', te: 'ఖ', group: 'క-వర్గం (क-वर्ग)', sampleWord: 'खरगोश (ఖర్గోష్ - కుందేలు)' },
+            { hi: 'ग', te: 'గ', group: 'క-వర్గం (क-वर्ग)', sampleWord: 'गमला (గమ్లా - పూలకుండీ)' },
+            { hi: 'घ', te: 'ఘ', group: 'క-వర్గం (क-वर्ग)', sampleWord: 'घर (ఘర్ - ఇల్లు)' },
+            { hi: 'च', te: 'చ', group: 'చ-వర్గం (च-वर्ग)', sampleWord: 'चम्मच (చమ్మచ్ - చెంచా)' },
+            { hi: 'छ', te: 'ఛ', group: 'చ-వర్గం (च-वर्ग)', sampleWord: 'छतरी (ఛత్రీ - గొడుగు)' },
+            { hi: 'ज', te: 'జ', group: 'చ-వర్గం (च-वर्ग)', sampleWord: 'जहाज (జహాజ్ - ఓడ)' },
+            { hi: 'ट', te: 'ట', group: 'ట-వర్గం (ट-वर्ग)', sampleWord: 'टमाटर (టమాటర్ - టమాట)' },
+            { hi: 'ड', te: 'డ', group: 'ట-వర్గం (ट-वर्ग)', sampleWord: 'डमरू (డమరూ - డమరుకం)' },
+            { hi: 'त', te: 'త', group: 'త-వర్గం (त-वर्ग)', sampleWord: 'तरबूज (తర్బూజ్ - పుచ్చకాయ)' },
+            { hi: 'द', te: 'ద', group: 'త-వర్గం (त-वर्ग)', sampleWord: 'दवात (దవాత్ - సిరా బుడ్డి)' },
+            { hi: 'ध', te: 'ధ', group: 'త-వర్గం (त-वर्ग)', sampleWord: 'धनुष (ధనుష్ - విల్లు)' },
+            { hi: 'न', te: 'న', group: 'త-వర్గం (त-वर्ग)', sampleWord: 'नल (నల్ - కుళాయి)' },
+            { hi: 'प', te: 'ప', group: 'ప-వర్గం (प-वर्ग)', sampleWord: 'पतंग (పతంగ్ - గాలిపటం)' },
+            { hi: 'फ', te: 'ఫ', group: 'ప-వర్గం (प-वर्ग)', sampleWord: 'फल (ఫల్ - పండ్లు)' },
+            { hi: 'ब', te: 'బ', group: 'ప-వర్గం (प-वर्ग)', sampleWord: 'बतख (బతఖ్ - బాతు)' },
+            { hi: 'भ', te: 'భ', group: 'ప-వర్గం (प-वर्ग)', sampleWord: 'भालू (భాలూ - ఎలుగుబంటి)' },
+            { hi: 'म', te: 'మ', group: 'ప-వర్గం (प-वर्ग)', sampleWord: 'मछली (మఛ్లీ - చేప)' },
+            { hi: 'य', te: 'య', group: 'అంతస్థ (अंतस्थ)', sampleWord: 'यज्ञ (యజ్ఞ - యాగం)' },
+            { hi: 'र', te: 'ర', group: 'అంతస్థ (अंतस्थ)', sampleWord: 'रथ (రథ్ - రథము)' },
+            { hi: 'ल', te: 'ल', te: 'ల', group: 'అంతస్థ (अंतस्थ)', sampleWord: 'लड्डू (లడ్డూ - లడ్డు)' },
+            { hi: 'व', te: 'వ', group: 'అంతస్థ (अंतस्थ)', sampleWord: 'वन (వన్ - అడవి)' },
+            { hi: 'श', te: 'శ', group: 'ఊష్మ (ऊष्म)', sampleWord: 'शरबत (శర్బత్ - పానీయం)' },
+            { hi: 'स', te: 'స', group: 'ఊష్మ (ऊष्म)', sampleWord: 'सपेरा (సపేరా - పాములవాడు)' },
+            { hi: 'ह', te: 'హ', group: 'ఊష్మ (ऊष्म)', sampleWord: 'हाथी (హాథీ - ఏనుగు)' }
+        ];
+
+        // 65 Curated Basic Hindi Words using Guninthalu (Matras) for kids
+        const BASIC_HINDI_WORDS = [
+            { hi: 'काम', tePron: 'కామ్', teMeaning: 'పని (Work)', baseCons: 'क (క)', matraUsed: 'ा (దీర్ఘం)', breakdown: 'क + ा (కా) + म (మ్) = काम (కామ్)', detail: 'ఇందులో మొదటి అక్షరం "क (క)" కు "ा (ఆ మాత్ర - దీర్ఘం)" చేర్చడం వల్ల "का (కా)" అయింది. పక్కన "म (మ)" చేరి "काम (కామ్)" అంటే తెలుగులో "పని" అని అర్థం.' },
+            { hi: 'नाम', tePron: 'నామ్', teMeaning: 'పేరు (Name)', baseCons: 'न (న)', matraUsed: 'ा (దీర్ఘం)', breakdown: 'न + ा (నా) + म (మ్) = नाम (నామ్)', detail: 'ఇందులో "न (న)" అక్షరానికి "ा (దీర్ఘం)" కలిపితే "ना (నా)" అవుతుంది. "नाम (నామ్)" అంటే తెలుగులో "పేరు".' },
+            { hi: 'आम', tePron: 'ఆమ్', teMeaning: 'మామిడి పండు (Mango)', baseCons: 'आ (ఆ)', matraUsed: 'ा (దీర్ఘం)', breakdown: 'आ (ఆ) + म (మ్) = आम (ఆమ్)', detail: '"आ (ఆ)" మరియు "म (మ)" కలిస్తే "आम (ఆమ్)" అవుతుంది. ఆమ్ అంటే పిల్లలకు ఎంతో ఇష్టమైన "మామిడి పండు".' },
+            { hi: 'गाय', tePron: 'గాయ్', teMeaning: 'ఆవు (Cow)', baseCons: 'ग (గ)', matraUsed: 'ा (దీర్ఘం)', breakdown: 'ग + ा (గా) + य (య్) = गाय (గాయ్)', detail: '"ग (గ)" కు "ा (ఆ మాత్ర)" చేరిస్తే "गा (గా)" అవుతుంది. "गाय (గాయ్)" అంటే తెలుగులో "ఆవు".' },
+            { hi: 'राजा', tePron: 'రాజా', teMeaning: 'రాజు (King)', baseCons: 'र (ర), ज (జ)', matraUsed: 'ा (దీర్ఘం)', breakdown: 'र+ा (రా) + ज+ा (జా) = राजा (రాజా)', detail: 'ఇక్కడ రెండు అక్షరాలకూ దీర్ఘం (ा) ఉంది! र+ा = रा (రా), ज+ा = जा (जा). రెండూ కలిపితే "राजा (రాజా)" అంటే "రాజు".' },
+            { hi: 'तारा', tePron: 'తారా', teMeaning: 'నక్షత్రం (Star)', baseCons: 'त (త), र (ర)', matraUsed: 'ा (దీర్ఘం)', breakdown: 'त+ा (తా) + र+ा (రా) = तारा (తారా)', detail: 'त+ा = ता (తా) మరియు र+ा = रा (రా). ఆకాశంలో మెరిసే "నక్షత్రం" ను హిందీలో "तारा (తారా)" అంటారు.' },
+            { hi: 'माला', tePron: 'మాలా', teMeaning: 'హారం / దండ (Garland)', baseCons: 'म (మ), ल (ల)', matraUsed: 'ा (దీర్ఘం)', breakdown: 'म+ा (మా) + ल+ा (లా) = माला (మాలా)', detail: 'म+ा = मा (మా) మరియు ल+ा = ला (లా). పూల దండను హిందీలో "माला (మాలా)" అంటారు.' },
+            { hi: 'बाजा', tePron: 'బాజా', teMeaning: 'వాయిద్యం (Musical Horn)', baseCons: 'ब (బ), ज (జ)', matraUsed: 'ा (దీర్ఘం)', breakdown: 'ब+ा (బా) + ज+ा (जा) = बाजा (బాజా)', detail: 'ब+ा = बा (బా), ज+ा = जा (జా). సంగీత వాయిద్యాన్ని హిందీలో "बाजा (బాజా)" అంటారు.' },
+            { hi: 'छाता', tePron: 'ఛాతా', teMeaning: 'గొడుగు (Umbrella)', baseCons: 'छ (ఛ), त (త)', matraUsed: 'ा (దీర్ఘం)', breakdown: 'छ+ा (ఛా) + त+ा (తా) = छाता (ఛాతా)', detail: 'వర్షం వచ్చినప్పుడు వాడే "గొడుగు"ను హిందీలో "छाता (ఛాతా)" అంటారు. ఇందులో ఆ-మాత్ర (ा) ఉపయోగించబడింది.' },
+            { hi: 'किताब', tePron: 'కితాబ్', teMeaning: 'పుస్తకం (Book)', baseCons: 'क (క)', matraUsed: 'ि (గుడి - ఇ మాత్ర)', breakdown: 'क+ि (కి) + त+ा (తా) + ब (బ్) = किताब', detail: '"क (క)" కు ఎడమవైపు గుడి గుర్తు (ि) పెడితే "कि (కి)" అవుతుంది. "त+ा = ता (తా)". కలిపితే "किताब (కితాబ్)" అంటే మనం చదువుకునే "పుస్తకం".' },
+            { hi: 'दिन', tePron: 'దిన్', teMeaning: 'రోజు / పగలు (Day)', baseCons: 'द (ద)', matraUsed: 'ि (గుడి)', breakdown: 'द+ि (ది) + न (న్) = दिन (దిన్)', detail: '"द (ద)" అక్షరానికి "ि (ఇ-మాత్ర / గుడి)" కలిపితే "दि (ది)" అవుతుంది. "दिन (దిన్)" అంటే తెలుగులో "రోజు" లేదా "పగలు".' },
+            { hi: 'सिर', tePron: 'సిర్', teMeaning: 'తల (Head)', baseCons: 'स (స)', matraUsed: 'ि (గుడి)', breakdown: 'स+ि (సి) + र (ర్) = सिर (సిర్)', detail: '"स (స)" కు గుడి (ि) పెడితే "सि (సి)" అవుతుంది. "सिर (సిర్)" అంటే మన శరీరంలోని "తల".' },
+            { hi: 'चिड़िया', tePron: 'చిడియా', teMeaning: 'పక్షి / పిచ్చుక (Bird)', baseCons: 'च (చ)', matraUsed: 'ि (గుడి)', breakdown: 'च+ि (చి) + ड़+ि (డి) + य+ा (యా) = चिड़िया', detail: '"च (చ)" కు గుడి (ि) పెడితే "चि (చి)" అవుతుంది. "चिड़िया (చిడియా)" అంటే తెలుగులో "చిన్న పక్షి / పిచ్చుక".' },
+            { hi: 'गिलास', tePron: 'గిలాస్', teMeaning: 'గ్లాసు (Glass)', baseCons: 'ग (గ)', matraUsed: 'ि (గుడి)', breakdown: 'ग+ि (గి) + ल+ा (లా) + स (స్) = गिलास', detail: '"ग (గ)" కు గుడి (ि) చేరిస్తే "गि (గి)" అవుతుంది. నీళ్ళు త్రాగే "గ్లాసు"ను హిందీలో "गिलास (గిలాస్)" అంటారు.' },
+            { hi: 'हिरन', tePron: 'హిరన్', teMeaning: 'జింక (Deer)', baseCons: 'ह (హ)', matraUsed: 'ि (గుడి)', breakdown: 'ह+ि (హి) + र (ర) + न (న్) = हिरन', detail: '"ह (హ)" కు గుడి (ि) పెడితే "हि (హి)" అవుతుంది. అడవిలో పరిగెత్తే "జింక"ను హిందీలో "हिरन (హిరన్)" అంటారు.' },
+            { hi: 'पानी', tePron: 'పానీ', teMeaning: 'నీరు (Water)', baseCons: 'न (న)', matraUsed: 'ी (గుడి దీర్ఘం)', breakdown: 'प+ा (పా) + न+ी (నీ) = पानी (పానీ)', detail: '"प+ा = पा (పా)" మరియు "न+ी = नी (నీ)". "पानी (పానీ)" అంటే మనం త్రాగే "నీరు".' },
+            { hi: 'मछली', tePron: 'మఛ్లీ', teMeaning: 'చేప (Fish)', baseCons: 'ल (ల)', matraUsed: 'ी (గుడి దీర్ఘం)', breakdown: 'म (మ) + छ (ఛ్) + ल+ी (లీ) = मछली', detail: 'చివరి అక్షరం "ल (ల)" కు గుడి దీర్ఘం (ी) చేర్చడం వల్ల "ली (లీ)" అయింది. "मछली (మఛ్లీ)" అంటే నీటిలో ఈదే "చేప".' },
+            { hi: 'हाथी', tePron: 'హాథీ', teMeaning: 'ఏనుగు (Elephant)', baseCons: 'ह (హ), थ (థ)', matraUsed: 'ा మరియు ी', breakdown: 'ह+ा (హా) + थ+ी (థీ) = हाथी (హాథీ)', detail: 'ह+ा = हा (హా) మరియు थ+ी = थी (థీ). పెద్ద తొండం ఉండే "ఏనుగు"ను హిందీలో "हाथी (హాథీ)" అంటారు.' },
+            { hi: 'तितली', tePron: 'తిత్లీ', teMeaning: 'సీతాకోకచిలుక (Butterfly)', baseCons: 'त (త), ल (ల)', matraUsed: 'ि మరియు ी', breakdown: 'त+ि (తి) + त (త్) + ल+ी (లీ) = तितली', detail: 'మొదట "त+ि = ति (తి)" (గుడి), చివర "ल+ी = ली (లీ)" (గుడి దీర్ఘం). రంగురంగుల "సీతాకోకచిలుక"ను హిందీలో "तितली (తిత్లీ)" అంటారు.' },
+            { hi: 'नदी', tePron: 'నదీ', teMeaning: 'నది / ఏరు (River)', baseCons: 'द (ద)', matraUsed: 'ी (గుడి దీర్ఘం)', breakdown: 'न (న) + द+ी (దీ) = नदी (నదీ)', detail: '"द (ద)" కు కుడివైపు గుడి దీర్ఘం (ी) పెడితే "दी (దీ)" అవుతుంది. "नदी (నదీ)" అంటే ప్రవహించే "నది".' },
+            { hi: 'घड़ी', tePron: 'ఘడీ', teMeaning: 'గడియారం (Clock/Watch)', baseCons: 'ड़ (డ)', matraUsed: 'ी (గుడి దీర్ఘం)', breakdown: 'घ (ఘ) + ड़+ी (డీ) = घड़ी (ఘడీ)', detail: 'సమయం చూపించే "గడియారం"ను హిందీలో "घड़ी (ఘడీ)" అంటారు. ఇందులో ी (ఈ-మాత్ర) ఉంది.' },
+            { hi: 'गुलाब', tePron: 'గులాబ్', teMeaning: 'గులాబీ పువ్వు (Rose)', baseCons: 'ग (గ)', matraUsed: 'ु (కొమ్ము - ఉ మాత్ర)', breakdown: 'ग+ु (గు) + ल+ा (లా) + ब (బ్) = गुलाब', detail: '"ग (గ)" క్రింద కొమ్ము (ु) పెడితే "गु (గు)" అవుతుంది. "गुलाब (గులాబ్)" అంటే అందమైన "గులాబీ పువ్వు".' },
+            { hi: 'पुल', tePron: 'పుల్', teMeaning: 'వంతెన (Bridge)', baseCons: 'प (ప)', matraUsed: 'ु (కొమ్ము)', breakdown: 'प+ु (పు) + ल (ల్) = पुल (పుల్)', detail: '"प (ప)" క్రింద ఉ-మాత్ర (ु) పెడితే "पु (పు)" అవుతుంది. నదిపై కట్టే "వంతెన"ను హిందీలో "पुल (పుల్)" అంటారు.' },
+            { hi: 'कछुआ', tePron: 'కఛుఆ', teMeaning: 'తాబేలు (Tortoise)', baseCons: 'छ (ఛ)', matraUsed: 'ु (కొమ్ము)', breakdown: 'क (క) + छ+ु (ఛు) + आ (ఆ) = कछुआ', detail: '"छ (ఛ)" క్రింద కొమ్ము (ु) పెడితే "छु (ఛు)" అవుతుంది. నెమ్మదిగా నడిచే "తాబేలు"ను హిందీలో "कछुआ (కఛుఆ)" అంటారు.' },
+            { hi: 'साबुन', tePron: 'సాబున్', teMeaning: 'సబ్బు (Soap)', baseCons: 'ब (బ)', matraUsed: 'ु (కొమ్ము)', breakdown: 'स+ा (సా) + ब+ु (బు) + न (న్) = साबुन', detail: '"ब (బ)" క్రింద కొమ్ము (ु) పెడితే "बु (బు)" అవుతుంది. స్నానానికి వాడే "సబ్బు"ను హిందీలో "साबुन (సాబున్)" అంటారు.' },
+            { hi: 'धनुष', tePron: 'ధనుష్', teMeaning: 'విల్లు (Bow)', baseCons: 'न (న)', matraUsed: 'ु (కొమ్ము)', breakdown: 'ध (ధ) + न+ु (ను) + ष (ష్) = धनुष', detail: '"न (న)" క్రింద కొమ్ము (ु) పెడితే "नु (ను)" అవుతుంది. "धनुष (ధనుష్)" అంటే బాణం వేసే "విల్లు".' },
+            { hi: 'दूध', tePron: 'దూధ్', teMeaning: 'పాలు (Milk)', baseCons: 'द (ద)', matraUsed: 'ू (కొమ్ము దీర్ఘం)', breakdown: 'द+ू (దూ) + ध (ధ్) = दूध (దూధ్)', detail: '"द (ద)" క్రింద ఊ-మాత్ర (ू - కొమ్ము దీర్ఘం) పెడితే "दू (దూ)" అవుతుంది. బలాన్నిచ్చే "పాలు"ను హిందీలో "दूध (దూధ్)" అంటారు.' },
+            { hi: 'फूल', tePron: 'ఫూల్', teMeaning: 'పువ్వు (Flower)', baseCons: 'फ (ఫ)', matraUsed: 'ू (కొమ్ము దీర్ఘం)', breakdown: 'फ+ू (ఫూ) + ल (ల్) = फूल (ఫూల్)', detail: '"फ (ఫ)" క్రింద కొమ్ము దీర్ఘం (ू) పెడితే "फू (ఫూ)" అవుతుంది. "फूल (ఫూల్)" అంటే తెలుగులో "పువ్వు".' },
+            { hi: 'सूरज', tePron: 'సూరజ్', teMeaning: 'సూర్యుడు (Sun)', baseCons: 'स (స)', matraUsed: 'ू (కొమ్ము దీర్ఘం)', breakdown: 'स+ू (సూ) + र (ర) + ज (జ్) = सूरज', detail: '"स (స)" క్రింద కొమ్ము దీర్ఘం (ू) చేరితే "सू (సూ)" అవుతుంది. వెలుగునిచ్చే "సూర్యుడు"ని హిందీలో "सूरज (సూరజ్)" అంటారు.' },
+            { hi: 'भालू', tePron: 'భాలూ', teMeaning: 'ఎలుగుబంటి (Bear)', baseCons: 'ल (ల)', matraUsed: 'ू (కొమ్ము దీర్ఘం)', breakdown: 'भ+ा (భా) + ल+ू (లూ) = भालू (భాలూ)', detail: '"भ+ा = भा (భా)" మరియు "ल+ू = लू (లూ)". అడవిలో ఉండే "ఎలుగుబంటి"ని హిందీలో "भालू (భాలూ)" అంటారు.' },
+            { hi: 'चूहा', tePron: 'చూహా', teMeaning: 'ఎలుక (Mouse/Rat)', baseCons: 'च (చ)', matraUsed: 'ू (కొమ్ము దీర్ఘం)', breakdown: 'च+ू (చూ) + ह+ा (హా) = चूहा (చూహా)', detail: '"च (చ)" కు కొమ్ము దీర్ఘం (ू) పెడితే "चू (చూ)" అవుతుంది. చిన్న "ఎలుక"ను హిందీలో "चूहा (చూహా)" అంటారు.' },
+            { hi: 'वृक्ष', tePron: 'వృక్ష్', teMeaning: 'చెట్టు (Tree)', baseCons: 'व (వ)', matraUsed: 'ृ (వట్రుసుడి - ఋ మాత్ర)', breakdown: 'व+ृ (వృ) + क्ष (క్ష్) = वृक्ष (వృక్ష్)', detail: '"व (వ)" క్రింద ఋ-మాత్ర (ृ) పెడితే తెలుగులో వట్రుసుడి లాగా "वृ (వృ)" అవుతుంది. "वृक्ष (వృక్ష్)" అంటే "చెట్టు".' },
+            { hi: 'गृह', tePron: 'గృహ్', teMeaning: 'ఇల్లు / గృహము (Home)', baseCons: 'ग (గ)', matraUsed: 'ृ (వట్రుసుడి)', breakdown: 'ग+ृ (గృ) + ह (హ్) = गृह (గృహ్)', detail: '"ग (గ)" క్రింద ृ గుర్తు పెడితే "गृ (గృ)" అవుతుంది. "गृह (గృహ్)" అంటే "ఇల్లు / గృహము".' },
+            { hi: 'मृग', tePron: 'మృగ్', teMeaning: 'జింక (Deer)', baseCons: 'म (మ)', matraUsed: 'ृ (వట్రుసుడి)', breakdown: 'म+ृ (మృ) + ग (గ్) = मृग (మృగ్)', detail: '"म (మ)" క్రింద ृ గుర్తు పెడితే "मृ (మృ)" అవుతుంది. "मृग (మృగ్)" అంటే తెలుగులో "జింక / మృగము".' },
+            { hi: 'कृषक', tePron: 'కృషక్', teMeaning: 'రైతు (Farmer)', baseCons: 'क (క)', matraUsed: 'ृ (వట్రుసుడి)', breakdown: 'क+ृ (కృ) + ष (ష) + क (క్) = कृषक', detail: '"क (క)" క్రింద ृ గుర్తు పెడితే "कृ (కృ)" అవుతుంది. పంటలు పండించే "రైతు"ను హిందీలో "कृषक (కృషక్)" అంటారు.' },
+            { hi: 'केला', tePron: 'కేలా', teMeaning: 'అరటిపండు (Banana)', baseCons: 'क (క)', matraUsed: 'े (ఏత్వం - ఏ మాత్ర)', breakdown: 'क+े (కే) + ल+ा (లా) = केला (కేలా)', detail: '"क (క)" పైన ఒక ఏటవాలు గీత (े - ఏ మాత్ర) పెడితే "के (కే)" అవుతుంది. "केला (కేలా)" అంటే "అరటిపండు".' },
+            { hi: 'सेब', tePron: 'సేబ్', teMeaning: 'ఆపిల్ పండు (Apple)', baseCons: 'स (స)', matraUsed: 'े (ఏత్వం)', breakdown: 'स+े (సే) + ब (బ్) = सेब (సేబ్)', detail: '"स (స)" పైన ఏ-మాత్ర (े) పెడితే "से (సే)" అవుతుంది. ఎర్రని "ఆపిల్ పండు"ను హిందీలో "सेब (సేబ్)" అంటారు.' },
+            { hi: 'शेर', tePron: 'శేర్', teMeaning: 'సింహం (Lion)', baseCons: 'श (శ)', matraUsed: 'े (ఏత్వం)', breakdown: 'श+े (శే) + र (ర్) = शेर (శేర్)', detail: '"श (శ)" పైన ఒక గీత (े) పెడితే "शे (శే)" అవుతుంది. అడవికి రాజైన "సింహం"ను హిందీలో "शेर (శేర్)" అంటారు.' },
+            { hi: 'पेड़', tePron: 'పేడ్', teMeaning: 'చెట్టు (Tree)', baseCons: 'प (ప)', matraUsed: 'े (ఏత్వం)', breakdown: 'प+े (పే) + ड़ (డ్) = पेड़ (పేడ్)', detail: '"प (ప)" పైన ఏ-మాత్ర (े) పెడితే "पे (పే)" అవుతుంది. నీడనిచ్చే "చెట్టు"ను హిందీలో "पेड़ (పేడ్)" అంటారు.' },
+            { hi: 'रेल', tePron: 'రేల్', teMeaning: 'రైలు బండి (Train)', baseCons: 'र (ర)', matraUsed: 'े (ఏత్వం)', breakdown: 'र+े (రే) + ल (ల్) = रेल (రేల్)', detail: '"र (ర)" పైన ఏ-మాత్ర (े) పెడితే "रे (రే)" అవుతుంది. పట్టాలపై వెళ్ళే "రైలు బండి"ని హిందీలో "रेल (రేల్)" అంటారు.' },
+            { hi: 'मेला', tePron: 'మేలా', teMeaning: 'జాతర / సంత (Fair)', baseCons: 'म (మ)', matraUsed: 'े (ఏత్వం)', breakdown: 'म+े (మే) + ल+ा (లా) = मेला (మేలా)', detail: '"म (మ)" పైన ఏ-మాత్ర (े) పెడితే "मे (మే)" అవుతుంది. పండుగలలో జరిగే "జాతర"ను హిందీలో "मेला (మేలా)" అంటారు.' },
+            { hi: 'पैसा', tePron: 'పైసా', teMeaning: 'డబ్బు / పైసా (Money)', baseCons: 'प (ప)', matraUsed: 'ै (ఐత్వం - ఐ మాత్ర)', breakdown: 'प+ै (పై) + स+ा (సా) = पैसा (పైసా)', detail: '"प (ప)" తలపైన రెండు గీతలు (ै - ఐ మాత్ర) పెడితే తెలుగులో ఐత్వం లాగా "पै (పై)" అవుతుంది. "पैसा (పైసా)" అంటే "డబ్బు".' },
+            { hi: 'थैला', tePron: 'థైలా', teMeaning: 'సంచి (Bag)', baseCons: 'थ (థ)', matraUsed: 'ै (ఐత్వం)', breakdown: 'थ+ै (థై) + ल+ा (లా) = थैला (థైలా)', detail: '"थ (థ)" పైన రెండు గీతలు (ै) పెడితే "थै (థై)" అవుతుంది. కూరగాయలు తెచ్చుకునే "సంచి"ని హిందీలో "थैला (థైలా)" అంటారు.' },
+            { hi: 'पैर', tePron: 'పైర్', teMeaning: 'కాలు / పాదం (Foot/Leg)', baseCons: 'प (ప)', matraUsed: 'ै (ఐత్వం)', breakdown: 'प+ै (పై) + र (ర్) = पैर (పైర్)', detail: '"प (ప)" పైన ఐ-మాత్ర (ै) చేరిస్తే "पै (పై)" అవుతుంది. మన "కాలు లేదా పాదం"ను హిందీలో "पैर (పైర్)" అంటారు.' },
+            { hi: 'बैल', tePron: 'బైల్', teMeaning: 'ఎద్దు (Bull/Ox)', baseCons: 'ब (బ)', matraUsed: 'ै (ఐత్వం)', breakdown: 'ब+ै (బై) + ल (ల్) = बैल (బైల్)', detail: '"ब (బ)" పైన రెండు గీతలు (ै) పెడితే "बै (బై)" అవుతుంది. పొలం దున్నే "ఎద్దు"ను హిందీలో "बैल (బైల్)" అంటారు.' },
+            { hi: 'मैना', tePron: 'మైనా', teMeaning: 'మైనా పక్షి (Myna Bird)', baseCons: 'म (మ)', matraUsed: 'ै (ఐత్వం)', breakdown: 'म+ै (మై) + न+ा (నా) = मैना (మైనా)', detail: '"म (మ)" పైన ఐ-మాత్ర (ै) పెడితే "मै (మై)" అవుతుంది. తియ్యగా కూసే "మైనా పక్షి"ని హిందీలో కూడా "मैना" అంటారు.' },
+            { hi: 'सैनिक', tePron: 'సైనిక్', teMeaning: 'సైనికుడు (Soldier)', baseCons: 'स (స)', matraUsed: 'ै (ఐత్వం)', breakdown: 'स+ै (సై) + न+ि (ని) + क (క్) = सैनिक', detail: '"स (స)" పైన ఐ-మాత్ర (ै) పెడితే "सै (సై)" అవుతుంది. దేశాన్ని కాపాడే "సైనికుడు"ను హిందీలో "सैनिक (సైనిక్)" అంటారు.' },
+            { hi: 'मोर', tePron: 'మోర్', teMeaning: 'నెమలి (Peacock)', baseCons: 'म (మ)', matraUsed: 'ो (ఓత్వం - ఓ మాత్ర)', breakdown: 'म+ो (మో) + र (ర్) = मोर (మోర్)', detail: '"म (మ)" పక్కన గీత, పైన ఒక కొమ్ము (ो - ఓ మాత్ర) పెడితే "मो (మో)" అవుతుంది. మన జాతీయ పక్షి "నెమలి"ని హిందీలో "मोर (మోర్)" అంటారు.' },
+            { hi: 'तोता', tePron: 'తోతా', teMeaning: 'చిలుక (Parrot)', baseCons: 'त (త)', matraUsed: 'ो (ఓత్వం)', breakdown: 'त+ो (తో) + त+ा (తా) = तोता (తోతా)', detail: '"त (త)" కు ఓ-మాత్ర (ो) కలిపితే "तो (తో)" అవుతుంది. ఆకుపచ్చని రామచిలుకను హిందీలో "तोता (తోతా)" అంటారు.' },
+            { hi: 'घोड़ा', tePron: 'ఘోడా', teMeaning: 'గుర్రం (Horse)', baseCons: 'घ (ఘ)', matraUsed: 'ो (ఓత్వం)', breakdown: 'घ+ो (ఘో) + ड़+ा (డా) = घोड़ा (ఘోడా)', detail: '"घ (ఘ)" కు ఓ-మాత్ర (ो) కలిపితే "घो (ఘో)" అవుతుంది. వేగంగా పరిగెత్తే "గుర్రం"ను హిందీలో "घोड़ा (ఘోడా)" అంటారు.' },
+            { hi: 'रोटी', tePron: 'రోటీ', teMeaning: 'రొట్టె / చపాతీ (Bread/Roti)', baseCons: 'र (ర)', matraUsed: 'ो (ఓత్వం)', breakdown: 'र+ो (రో) + ट+ी (టీ) = रोटी (రోటీ)', detail: '"र (ర)" కు ఓ-మాత్ర (ो) పెడితే "रो (రో)" అవుతుంది. మనం తినే "రొట్టె / చపాతీ"ని హిందీలో "रोटी (రోటీ)" అంటారు.' },
+            { hi: 'कोयल', tePron: 'కోయల్', teMeaning: 'కోయిల (Cuckoo)', baseCons: 'क (క)', matraUsed: 'ो (ఓత్వం)', breakdown: 'क+ो (కో) + य (య) + ल (ల్) = कोयल', detail: '"क (క)" కు ఓ-మాత్ర (ो) పెడితే "को (కో)" అవుతుంది. కమ్మగా పాడే "కోయిల"ను హిందీలో "कोयल (కోయల్)" అంటారు.' },
+            { hi: 'टोपी', tePron: 'టోపీ', teMeaning: 'టోపీ (Cap/Hat)', baseCons: 'ट (ట)', matraUsed: 'ो (ఓత్వం)', breakdown: 'ट+ो (టో) + प+ी (పీ) = टोपी (టోపీ)', detail: '"ट (ట)" కు ఓ-మాత్ర (ो) చేరిస్తే "टो (టో)" అవుతుంది. తలపై పెట్టుకునే "టోపీ"ని హిందీలో "टोपी" అంటారు.' },
+            { hi: 'कौआ', tePron: 'కౌఆ', teMeaning: 'కాకి (Crow)', baseCons: 'क (క)', matraUsed: 'ौ (ఔత్వం - ఔ మాత్ర)', breakdown: 'क+ौ (కౌ) + आ (ఆ) = कौआ (కౌఆ)', detail: '"क (క)" పక్కన నిలువు గీత, పైన రెండు కొమ్ములు (ौ - ఔ మాత్ర) పెడితే "कौ (కౌ)" అవుతుంది. "कौआ (కౌఆ)" అంటే "కాకి".' },
+            { hi: 'पौधा', tePron: 'పౌధా', teMeaning: 'మొక్క (Small Plant)', baseCons: 'प (ప)', matraUsed: 'ौ (ఔత్వం)', breakdown: 'प+ौ (పౌ) + ध+ा (ధా) = पौधा (పౌధా)', detail: '"प (ప)" కు ఔ-మాత్ర (ौ) పెడితే "पौ (पौ)" అవుతుంది. చిన్న "మొక్క"ను హిందీలో "पौधा (పౌధా)" అంటారు.' },
+            { hi: 'नौका', tePron: 'నౌకా', teMeaning: 'పడవ (Boat)', baseCons: 'न (న)', matraUsed: 'ौ (ఔత్వం)', breakdown: 'न+ौ (నౌ) + क+ा (కా) = नौका (నౌका)', detail: '"न (న)" కు ఔ-మాత్ర (ौ) చేరిస్తే "नौ (నౌ)" అవుతుంది. నీటిపై వెళ్ళే "పడవ"ను హిందీలో "नौका (నౌకా)" అంటారు.' },
+            { hi: 'खिलौना', tePron: 'ఖిలౌనా', teMeaning: 'ఆట బొమ్మ (Toy)', baseCons: 'ल (ల)', matraUsed: 'ौ (ఔత్వం)', breakdown: 'ख+ि (ఖి) + ल+ौ (లౌ) + न+ा (నా) = खिलौना', detail: '"ल (ల)" కు ఔ-మాత్ర (ौ) పెడితే "लौ (లౌ)" అవుతుంది. పిల్లలు ఆడుకునే "బొమ్మ"ను హిందీలో "खिलौना (ఖిలౌనా)" అంటారు.' },
+            { hi: 'तौलिया', tePron: 'తౌలియా', teMeaning: 'తువ్వాలు (Towel)', baseCons: 'त (త)', matraUsed: 'ौ (ఔత్వం)', breakdown: 'त+ौ (తౌ) + ल+ि (లి) + य+ा (యా) = तौलिया', detail: '"त (త)" కు ఔ-మాత్ర (ौ) పెడితే "तौ (తౌ)" అవుతుంది. ఒళ్ళు తుడుచుకునే "తువ్వాలు"ను హిందీలో "तौलिया (తౌలియా)" అంటారు.' },
+            { hi: 'पतंग', tePron: 'పతంగ్', teMeaning: 'గాలిపటం (Kite)', baseCons: 'त (త)', matraUsed: 'ं (సున్నా - అనుస్వారం)', breakdown: 'प (ప) + त+ं (తం) + ग (గ్) = पतंग', detail: '"त (త)" పైన చుక్క (ं - బిందీ) పెడితే "तं (తం)" అవుతుంది. ఆకాశంలో ఎగిరే "గాలిపటం"ను హిందీలో "पतंग (పతంగ్)" అంటారు.' },
+            { hi: 'बंदर', tePron: 'బందర్', teMeaning: 'కోతి (Monkey)', baseCons: 'ब (బ)', matraUsed: 'ं (సున్నా - బిందీ)', breakdown: 'ब+ं (బం) + द (ద) + र (ర్) = बंदर', detail: '"ब (బ)" పైన చుక్క (ं) పెడితే "बं (బం)" అవుతుంది. చెట్లపై దూకే "కోతి"ని హిందీలో "बंदर (బందర్)" అంటారు.' },
+            { hi: 'अंगूर', tePron: 'అంగూర్', teMeaning: 'ద్రాక్ష పండ్లు (Grapes)', baseCons: 'अ (అ)', matraUsed: 'ं (సున్నా)', breakdown: 'अ+ं (అం) + ग+ू (గూ) + र (ర్) = अंगूर', detail: '"अ (అ)" పైన చుక్క పెడితే "अं (అం)" అవుతుంది. తియ్యని "ద్రాక్ష పండ్లు"ను హిందీలో "अंगूर (అంగూర్)" అంటారు.' },
+            { hi: 'शंख', tePron: 'శంఖ్', teMeaning: 'శంఖము (Conch)', baseCons: 'श (శ)', matraUsed: 'ं (సున్నా)', breakdown: 'श+ं (శం) + ख (ఖ్) = शंख (శంఖ్)', detail: '"श (శ)" పైన చుక్క (ं) పెడితే "शं (శం)" అవుతుంది. పూజలో ఊదే "శంఖము"ను హిందీలో "शंख (శంఖ్)" అంటారు.' },
+            { hi: 'झंडा', tePron: 'ఝండా', teMeaning: 'జెండా (Flag)', baseCons: 'झ (ఝ)', matraUsed: 'ं (సున్నా)', breakdown: 'झ+ं (ఝం) + ड+ा (డా) = झंडा (ఝండా)', detail: '"झ (ఝ)" పైన చుక్క (ं) పెడితే "झं (ఝం)" అవుతుంది. మన దేశపు "జెండా"ను హిందీలో "झंडा (ఝండా)" అంటారు.' },
+            { hi: 'प्रातः', tePron: 'ప్రాతః', teMeaning: 'ఉదయం / వేకువజాము (Morning)', baseCons: 'त (త)', matraUsed: 'ः (విసర్గ)', breakdown: 'प्र+ा (ప్రా) + त+ः (తః) = प्रातः', detail: '"त (త)" పక్కన రెండు చుక్కలు (ः - విసర్గ) పెడితే "तः (తః)" అవుతుంది. "प्रातः (ప్రాతః)" అంటే "ఉదయకాలం".' },
+            { hi: 'नमः', tePron: 'నమః', teMeaning: 'నమస్కారం (Salutation)', baseCons: 'म (మ)', matraUsed: 'ः (విసర్గ)', breakdown: 'न (న) + म+ः (మః) = नमः (నమః)', detail: '"म (మ)" పక్కన రెండు చుక్కలు (ः - విసర్గ) పెడితే "मः (మః)" అవుతుంది. "नमः (నమః)" అంటే భక్తితో చేసే "నమస్కారం".' }
+        ];
+
+        // Utility: Fisher-Yates Array Shuffle (ensures complete randomization on every load)
+        function shuffleArray(arr) {
+            const copy = [...arr];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        // Build 260+ Rich Questions Dynamically
+        function generateAllQuestions() {
+            const allQuestions = [];
+
+            // PART A: 200 Barakhadi Guninthalu Combination & Reading Questions across Consonants
+            // For each of the 25 consonants, we generate 8 distinct matra questions (25 * 8 = 200 questions)
+            const matraSubsetIndices = [
+                [1, 2, 3, 4, 5, 6, 7, 8],
+                [1, 3, 4, 6, 7, 9, 10, 11],
+                [2, 3, 5, 7, 8, 9, 11, 12],
+                [1, 2, 4, 5, 8, 9, 10, 12]
+            ];
+
+            CONSONANTS.forEach((cons, cIdx) => {
+                const teForms = makeTeluguForms(cons.te);
+                const chosenMatraIdxs = matraSubsetIndices[cIdx % matraSubsetIndices.length];
+
+                chosenMatraIdxs.forEach((mIdx, localOrder) => {
+                    const m = MATRAS[mIdx];
+                    const combinedHindi = cons.hi + m.matraHi;
+                    const combinedTelugu = m.modFn(teForms);
+
+                    // Alternate between Type 1 (Hindi + Matra -> Choose Hindi/Telugu syllable) and Type 2 (Telugu Gunintham -> Choose right Hindi Gunintham)
+                    if (localOrder % 2 === 0) {
+                        // Type 1: Given Hindi Gunintham letter, choose its right Telugu reading & combination
+                        const wrongMatras = shuffleArray(MATRAS.filter((_, idx) => idx !== mIdx)).slice(0, 3);
+                        const correctOpt = `${combinedHindi}  (${combinedTelugu})`;
+                        const wrongOpts = wrongMatras.map(wm => `${cons.hi + wm.matraHi}  (${wm.modFn(teForms)})`);
+
+                        allQuestions.push({
+                            category: 'హిందీ గుణింతాలు (Barakhadi)',
+                            bigSymbol: `${cons.hi} + ${m.matraHi || 'अ'} = ?`,
+                            promptTe: `హిందీ హల్లు "${cons.hi} (${cons.te})" కు "${m.matraDisplay}" చేరిస్తే ఏ గుణింత అక్షరం వస్తుంది?`,
+                            correctAnswer: correctOpt,
+                            options: shuffleArray([correctOpt, ...wrongOpts]),
+                            formulaParts: [
+                                { label: 'హిందీ హల్లు (Consonant)', val: `${cons.hi} (${cons.te})` },
+                                { label: 'గుణింతం గుర్తు (Matra)', val: `${m.matraHi || 'अ'} (${m.teluguSignName})` },
+                                { label: 'ఏర్పడిన అక్షరం (Result)', val: `${combinedHindi} = ${combinedTelugu}` }
+                            ],
+                            longExplanationTe: `
+                                <p>🌟 <b>అక్షరం విశ్లేషణ:</b> ఇక్కడ మనం <b>${cons.group}</b> లోని <b>"${cons.hi}"</b> (తెలుగులో <b>"${cons.te}"</b>) అనే హల్లును తీసుకున్నాము.</p>
+                                <p>🎨 <b>గుణింతం (మాత్రా) నియమం:</b> ${m.combineRuleTe}</p>
+                                <p>✅ <b>ఎలా చదవాలి?:</b> కాబట్టి <b>${cons.hi} (${cons.te})</b> + <b>${m.matraHi} (${m.teluguSignName})</b> కలిపినప్పుడు <b>"${combinedHindi}"</b> ఏర్పడుతుంది. దీనిని తెలుగులో స్పష్టంగా <b>"${combinedTelugu}"</b> అని చదవాలి. (ఉదాహరణ పదం: ${cons.sampleWord}).</p>
+                            `
+                        });
+                    } else {
+                        // Type 2: Given Telugu Gunintham pronunciation, choose the matching Hindi Gunintham letter
+                        const wrongMatras = shuffleArray(MATRAS.filter((_, idx) => idx !== mIdx)).slice(0, 3);
+                        const correctOpt = `${combinedHindi}`;
+                        const wrongOpts = wrongMatras.map(wm => `${cons.hi + wm.matraHi}`);
+
+                        allQuestions.push({
+                            category: 'తెలుగు నుండి హిందీ గుణింతం',
+                            bigSymbol: `"${combinedTelugu}"  ➔  ?`,
+                            promptTe: `తెలుగులోని "${combinedTelugu}" అనే గుణింత అక్షరాన్ని హిందీలో ఎలా రాస్తారు? సరైన అక్షరాన్ని ఎంచుకోండి:`,
+                            correctAnswer: correctOpt,
+                            options: shuffleArray([correctOpt, ...wrongOpts]),
+                            formulaParts: [
+                                { label: 'తెలుగు అక్షరం', val: `${combinedTelugu} (${cons.te} + ${m.teluguSignName})` },
+                                { label: 'హిందీ మాత్రా గుర్తు', val: `${m.matraHi} (${m.vowelHi} की मात्रा)` },
+                                { label: 'హిందీ గుణింతం', val: `${combinedHindi} (${combinedTelugu})` }
+                            ],
+                            longExplanationTe: `
+                                <p>🌟 <b>తెలుగు నుండి హిందీ పోలిక:</b> తెలుగులో <b>"${cons.te}"</b> అక్షరానికి <b>${m.teluguSignName}</b> చేరిస్తే <b>"${combinedTelugu}"</b> అవుతుంది కదా!</p>
+                                <p>🎨 <b>హిందీలో ఎలా రాయాలి?:</b> హిందీలో <b>"${cons.te}"</b> అంటే <b>"${cons.hi}"</b>. దీనికి <b>"${m.vowelHi}"</b> యొక్క గుణింతపు గుర్తు అయిన <b>"${m.matraHi}"</b> ను చేర్చాలి. ${m.combineRuleTe}</p>
+                                <p>✅ <b>సరైన సమాధానం:</b> అందుకే <b>${cons.hi} + ${m.matraHi} = "${combinedHindi}" (${combinedTelugu})</b> సరైన జవాబు అవుతుంది!</p>
+                            `
+                        });
+                    }
+                });
+            });
+
+            // PART B: 65 Basic Hindi Word & Meaning Questions (Total = 200 + 65 = 265 Questions!)
+            BASIC_HINDI_WORDS.forEach((wordObj, wIdx) => {
+                // Alternate between finding Telugu meaning of Hindi word AND choosing the right Hindi word for a Telugu meaning
+                if (wIdx % 2 === 0) {
+                    const distractors = shuffleArray(BASIC_HINDI_WORDS.filter((_, idx) => idx !== wIdx)).slice(0, 3);
+                    const correctOpt = `${wordObj.tePron} — ${wordObj.teMeaning}`;
+                    const wrongOpts = distractors.map(d => `${d.tePron} — ${d.teMeaning}`);
+
+                    allQuestions.push({
+                        category: 'హిందీ పదాలు - అర్థాలు (Words)',
+                        bigSymbol: `${wordObj.hi}`,
+                        promptTe: `"${wordObj.hi}" అనే హిందీ పదాన్ని తెలుగులో ఎలా చదువుతారు మరియు దాని అర్థం ఏమిటి?`,
+                        correctAnswer: correctOpt,
+                        options: shuffleArray([correctOpt, ...wrongOpts]),
+                        formulaParts: [
+                            { label: 'హిందీ పదం (Word)', val: `${wordObj.hi} (${wordObj.tePron})` },
+                            { label: 'ఉపయోగించిన గుణింతం', val: `${wordObj.matraUsed}` },
+                            { label: 'తెలుగు అర్థం (Meaning)', val: `${wordObj.teMeaning}` }
+                        ],
+                        longExplanationTe: `
+                            <p>📖 <b>పదం విభజన (Word Breakdown):</b> <b>${wordObj.breakdown}</b></p>
+                            <p>🔍 <b>గుణింతం వివరణ:</b> ${wordObj.detail}</p>
+                            <p>💡 <b>గుర్తుంచుకోండి:</b> కాబట్టి <b>"${wordObj.hi}"</b> అనే పదాన్ని తెలుగులో <b>"${wordObj.tePron}"</b> అని పలకాలి మరియు దీని అర్థం <b>"${wordObj.teMeaning}"</b>.</p>
+                        `
+                    });
+                } else {
+                    const distractors = shuffleArray(BASIC_HINDI_WORDS.filter((_, idx) => idx !== wIdx)).slice(0, 3);
+                    const correctOpt = `${wordObj.hi} (${wordObj.tePron})`;
+                    const wrongOpts = distractors.map(d => `${d.hi} (${d.tePron})`);
+
+                    allQuestions.push({
+                        category: 'సరైన హిందీ పదాన్ని ఎంచుకోండి',
+                        bigSymbol: `${wordObj.teMeaning}`,
+                        promptTe: `తెలుగులో "${wordObj.teMeaning}" అని అర్థం వచ్చే సరైన హిందీ పదాన్ని క్రింది వాటిలో ఎంచుకోండి:`,
+                        correctAnswer: correctOpt,
+                        options: shuffleArray([correctOpt, ...wrongOpts]),
+                        formulaParts: [
+                            { label: 'తెలుగు అర్థం', val: `${wordObj.teMeaning}` },
+                            { label: 'హిందీ గుణింత నిర్మాణం', val: `${wordObj.breakdown}` },
+                            { label: 'సరైన హిందీ పదం', val: `${wordObj.hi} (${wordObj.tePron})` }
+                        ],
+                        longExplanationTe: `
+                            <p>📖 <b>సరైన పదం ఎలా ఏర్పడింది?:</b> <b>${wordObj.breakdown}</b></p>
+                            <p>🔍 <b>పిల్లల కోసం వివరణ:</b> ${wordObj.detail}</p>
+                            <p>✅ <b>ముగింపు:</b> అందువల్ల <b>"${wordObj.teMeaning}"</b> ని హిందీలో <b>"${wordObj.hi}" (${wordObj.tePron})</b> అని రాస్తారు.</p>
+                        `
+                    });
+                }
+            });
+
+            // Jumble all 265 questions every time the file is opened
+            return shuffleArray(allQuestions);
+        }
+
+        /********************************************************************
+         * 2. APPLICATION STATE & LIVE TIMER
+         ********************************************************************/
+        let questions = [];
+        let currentQIndex = 0;
+        // Map of questionIndex -> { selectedOption, isCorrect }
+        let userAttempts = {};
+        let elapsedSeconds = 0;
+        let timerInterval = null;
+
+        // Mini-game scores for final report
+        let memoryPairsCompletedTotal = 0;
+        let matchGamePointsTotal = 0;
+        let hasAutoSubmittedOnResults = false;
+
+        // Format seconds as HH:MM:SS
+        function formatTime(sec) {
+            const hrs = Math.floor(sec / 3600);
+            const mins = Math.floor((sec % 3600) / 60);
+            const s = sec % 60;
+            return [hrs, mins, s].map(v => String(v).padStart(2, '0')).join(':');
+        }
+
+        function startLiveScreenTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                elapsedSeconds++;
+                const formatted = formatTime(elapsedSeconds);
+                const liveEl = document.getElementById('liveTimerDisplay');
+                const resEl = document.getElementById('resScreenTime');
+                if (liveEl) liveEl.textContent = formatted;
+                if (resEl) resEl.textContent = formatted;
+            }, 1000);
+        }
+
+        /********************************************************************
+         * 3. QUIZ ENGINE (SINGLE ATTEMPT LOCK, NAVIGATION, TELUGU EXPLANATION)
+         ********************************************************************/
+        function updateStatsBar() {
+            const total = questions.length;
+            const attemptedKeys = Object.keys(userAttempts);
+            const attempted = attemptedKeys.length;
+            const unattempted = total - attempted;
+            const correct = attemptedKeys.filter(k => userAttempts[k].isCorrect).length;
+            const wrong = attempted - correct;
+            const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+
+            // Header bar
+            document.getElementById('statTotal').textContent = total;
+            document.getElementById('statAttempted').textContent = attempted;
+            document.getElementById('statUnattempted').textContent = unattempted;
+            document.getElementById('statCorrect').textContent = correct;
+
+            // Progress bar
+            const pct = total > 0 ? ((attempted / total) * 100).toFixed(1) : 0;
+            document.getElementById('quizProgressBar').style.width = `${pct}%`;
+
+            // Results page numbers
+            document.getElementById('resTotalQs').textContent = total;
+            document.getElementById('resAttempted').textContent = attempted;
+            document.getElementById('resNotAttempted').textContent = unattempted;
+            document.getElementById('resCorrect').textContent = correct;
+            document.getElementById('resWrong').textContent = wrong;
+            document.getElementById('resAccuracy').textContent = `${accuracy}%`;
+            document.getElementById('resMemoryScore').textContent = memoryPairsCompletedTotal;
+            document.getElementById('resMatchScore').textContent = matchGamePointsTotal;
+        }
+
+        function renderQuestionPalette() {
+            const grid = document.getElementById('questionPaletteGrid');
+            grid.innerHTML = '';
+            questions.forEach((_, idx) => {
+                const btn = document.createElement('button');
+                const attempt = userAttempts[idx];
+                let colorClass = 'bg-slate-100 text-slate-700 hover:bg-indigo-100 border-slate-300';
+                if (attempt) {
+                    colorClass = attempt.isCorrect
+                        ? 'bg-emerald-500 text-white border-emerald-600'
+                        : 'bg-rose-500 text-white border-rose-600';
+                }
+                if (idx === currentQIndex) {
+                    colorClass += ' ring-2 ring-indigo-600 font-extrabold scale-105';
+                }
+                btn.className = `text-xs py-1.5 rounded-lg border font-bold transition ${colorClass}`;
+                btn.textContent = idx + 1;
+                btn.onclick = () => {
+                    currentQIndex = idx;
+                    renderCurrentQuestion();
+                };
+                grid.appendChild(btn);
+            });
+        }
+
+        function toggleQuestionPalette() {
+            const container = document.getElementById('questionPaletteContainer');
+            container.classList.toggle('hidden');
+            if (!container.classList.contains('hidden')) {
+                renderQuestionPalette();
+            }
+        }
+
+        function renderCurrentQuestion() {
+            const q = questions[currentQIndex];
+            const attempt = userAttempts[currentQIndex];
+
+            // Header Badges
+            document.getElementById('qBadgeNumber').textContent = `ప్రశ్న ${currentQIndex + 1} / ${questions.length}`;
+            document.getElementById('qCategoryBadge').textContent = q.category;
+
+            const statusBadge = document.getElementById('qAttemptStatusBadge');
+            if (attempt) {
+                statusBadge.className = attempt.isCorrect
+                    ? 'text-xs font-extrabold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300'
+                    : 'text-xs font-extrabold px-3 py-1 rounded-full bg-rose-100 text-rose-800 border border-rose-300';
+                statusBadge.innerHTML = `<i class="fa-solid fa-lock mr-1"></i>ప్రయత్నించారు - లాక్ చేయబడింది (Attempt Locked)`;
+            } else {
+                statusBadge.className = 'text-xs font-extrabold px-3 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300';
+                statusBadge.innerHTML = `<i class="fa-solid fa-hand-pointer mr-1"></i>ఒకసారి మాత్రమే అవకాశం (Click once to answer)`;
+            }
+
+            // Question Symbol & Prompt
+            document.getElementById('qBigSymbol').textContent = q.bigSymbol;
+            document.getElementById('qPromptTelugu').textContent = q.promptTe;
+
+            // Render 4 Options
+            const optContainer = document.getElementById('optionsContainer');
+            optContainer.innerHTML = '';
+            const optionLetters = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((optText, oIdx) => {
+                const btn = document.createElement('button');
+                let baseClasses = 'w-full text-left p-4 rounded-2xl border-4 font-extrabold text-base sm:text-xl transition flex items-center justify-between gap-3 fun-shadow-sm ';
+
+                if (!attempt) {
+                    // Not yet attempted: interactive colorful buttons
+                    baseClasses += 'bg-white hover:bg-indigo-50 border-indigo-200 hover:border-indigo-400 text-slate-800 btn-bounce cursor-pointer';
+                    btn.onclick = () => handleOptionSelect(optText);
+                } else {
+                    // Already attempted: lock button and highlight right/wrong
+                    btn.disabled = true;
+                    if (optText === q.correctAnswer) {
+                        baseClasses += 'bg-emerald-100 border-emerald-500 text-emerald-950';
+                    } else if (optText === attempt.selectedOption && !attempt.isCorrect) {
+                        baseClasses += 'bg-rose-100 border-rose-500 text-rose-950';
+                    } else {
+                        baseClasses += 'bg-slate-50 border-slate-200 text-slate-400 opacity-75';
+                    }
+                }
+
+                btn.className = baseClasses;
+
+                let rightIconHtml = '';
+                if (attempt) {
+                    if (optText === q.correctAnswer) {
+                        rightIconHtml = `<span class="bg-emerald-500 text-white text-xs sm:text-sm px-2.5 py-1 rounded-xl font-extrabold shrink-0">✓ సరైనది</span>`;
+                    } else if (optText === attempt.selectedOption && !attempt.isCorrect) {
+                        rightIconHtml = `<span class="bg-rose-500 text-white text-xs sm:text-sm px-2.5 py-1 rounded-xl font-extrabold shrink-0">✗ మీరు ఎంచుకున్నది</span>`;
+                    }
+                }
+
+                btn.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-extrabold text-sm shrink-0">
+                            ${optionLetters[oIdx]}
+                        </span>
+                        <span class="hindi-font tracking-wide">${optText}</span>
+                    </div>
+                    ${rightIconHtml}
+                `;
+
+                optContainer.appendChild(btn);
+            });
+
+            // Prev / Next button states
+            document.getElementById('btnPrevQ').disabled = (currentQIndex === 0);
+            const nextBtn = document.getElementById('btnNextQ');
+            if (currentQIndex === questions.length - 1) {
+                nextBtn.innerHTML = `<span>ఫలితాలు చూడండి (Finish)</span><i class="fa-solid fa-flag-checkered"></i>`;
+            } else {
+                nextBtn.innerHTML = `<span>తరువాత (Next)</span><i class="fa-solid fa-arrow-right"></i>`;
+            }
+
+            // Show or Hide Telugu Explanation Box
+            const expBox = document.getElementById('explanationBox');
+            if (attempt) {
+                expBox.classList.remove('hidden');
+                if (attempt.isCorrect) {
+                    expBox.className = 'mt-6 rounded-3xl p-5 sm:p-6 border-4 bg-emerald-50 border-emerald-400 animate-pop';
+                    document.getElementById('expStatusIcon').className = 'w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center text-2xl shrink-0 font-bold';
+                    document.getElementById('expStatusIcon').textContent = '🎉';
+                    document.getElementById('expStatusTitle').className = 'text-lg sm:text-xl font-extrabold text-emerald-900';
+                    document.getElementById('expStatusTitle').textContent = 'శభాష్! మీరు సరైన సమాధానం ఎంచుకున్నారు! (Correct Answer)';
+                } else {
+                    expBox.className = 'mt-6 rounded-3xl p-5 sm:p-6 border-4 bg-rose-50 border-rose-400 animate-pop';
+                    document.getElementById('expStatusIcon').className = 'w-12 h-12 rounded-2xl bg-rose-500 text-white flex items-center justify-center text-2xl shrink-0 font-bold';
+                    document.getElementById('expStatusIcon').textContent = '💡';
+                    document.getElementById('expStatusTitle').className = 'text-lg sm:text-xl font-extrabold text-rose-900';
+                    document.getElementById('expStatusTitle').textContent = 'అయ్యో! ఇది తప్పు సమాధానం. క్రింది వివరణ చదివి నేర్చుకోండి:';
+                }
+
+                document.getElementById('expCorrectAnswerLine').innerHTML =
+                    `సరైన సమాధానం (Correct Answer): <span class="bg-yellow-300 text-indigo-950 px-2.5 py-0.5 rounded-lg font-extrabold hindi-font">${q.correctAnswer}</span>`;
+
+                // Populate 3 Formula Breakdown Cards
+                const cardsContainer = document.getElementById('expFormulaCards');
+                cardsContainer.innerHTML = q.formulaParts.map(fp => `
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-2.5">
+                        <div class="text-[11px] font-bold text-indigo-600 uppercase">${fp.label}</div>
+                        <div class="text-base sm:text-lg font-extrabold text-indigo-950 hindi-font mt-0.5">${fp.val}</div>
+                    </div>
+                `).join('');
+
+                // Populate Long Telugu Explanation
+                document.getElementById('expLongTextTelugu').innerHTML = q.longExplanationTe;
+            } else {
+                expBox.classList.add('hidden');
+            }
+
+            // Update palette if open
+            if (!document.getElementById('questionPaletteContainer').classList.contains('hidden')) {
+                renderQuestionPalette();
+            }
+        }
+
+        function handleOptionSelect(selectedOption) {
+            // Single-attempt enforcement: ignore if already answered
+            if (userAttempts[currentQIndex]) return;
+
+            const q = questions[currentQIndex];
+            const isCorrect = (selectedOption === q.correctAnswer);
+
+            userAttempts[currentQIndex] = {
+                selectedOption,
+                isCorrect
+            };
+
+            updateStatsBar();
+            renderCurrentQuestion();
+        }
+
+        function navigateQuestion(direction) {
+            const nextIdx = currentQIndex + direction;
+            if (nextIdx >= 0 && nextIdx < questions.length) {
+                currentQIndex = nextIdx;
+                renderCurrentQuestion();
+                window.scrollTo({ top: 120, behavior: 'smooth' });
+            } else if (nextIdx >= questions.length) {
+                switchTab('results');
+            }
+        }
+
+        /********************************************************************
+         * 4. MEMORY GAME (FLIP CARDS: HINDI <-> TELUGU)
+         ********************************************************************/
+        let memoryCardsData = [];
+        let memoryFlippedIndices = [];
+        let memoryMatchedIds = new Set();
+        let memoryMoves = 0;
+        let memoryLockBoard = false;
+
+        function initMemoryGame() {
+            memoryFlippedIndices = [];
+            memoryMatchedIds.clear();
+            memoryMoves = 0;
+            memoryLockBoard = false;
+
+            document.getElementById('memMatchesCount').textContent = '0';
+            document.getElementById('memMovesCount').textContent = '0';
+            document.getElementById('memoryWinBanner').classList.add('hidden');
+
+            // Pick 6 random items from BASIC_HINDI_WORDS
+            const chosenWords = shuffleArray(BASIC_HINDI_WORDS).slice(0, 6);
+            const deck = [];
+
+            chosenWords.forEach((w, idx) => {
+                deck.push({
+                    pairId: idx,
+                    type: 'hindi',
+                    displayMain: w.hi,
+                    displaySub: 'హిందీ పదం',
+                    badgeColor: 'bg-indigo-600 text-white'
+                });
+                deck.push({
+                    pairId: idx,
+                    type: 'telugu',
+                    displayMain: w.tePron,
+                    displaySub: w.teMeaning,
+                    badgeColor: 'bg-pink-600 text-white'
+                });
+            });
+
+            memoryCardsData = shuffleArray(deck);
+            renderMemoryGrid();
+        }
+
+        function renderMemoryGrid() {
+            const grid = document.getElementById('memoryGrid');
+            grid.innerHTML = '';
+
+            memoryCardsData.forEach((card, idx) => {
+                const isFlipped = memoryFlippedIndices.includes(idx) || memoryMatchedIds.has(card.pairId);
+                const isMatched = memoryMatchedIds.has(card.pairId);
+
+                const cardEl = document.createElement('div');
+                cardEl.className = 'perspective-1000 h-28 sm:h-32 cursor-pointer select-none';
+                cardEl.onclick = () => flipMemoryCard(idx);
+
+                cardEl.innerHTML = `
+                    <div class="w-full h-full relative transform-style-3d ${isFlipped ? 'rotate-y-180' : ''}">
+                        <!-- Front of Card (Hidden Question Mark) -->
+                        <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl border-4 border-white fun-shadow-sm flex flex-col items-center justify-center text-white">
+                            <span class="text-3xl sm:text-4xl font-extrabold hindi-font">क?</span>
+                            <span class="text-[11px] font-bold text-yellow-200 mt-1">తిప్పండి (Tap)</span>
+                        </div>
+                        <!-- Back of Card (Revealed Content) -->
+                        <div class="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl border-4 ${isMatched ? 'bg-emerald-50 border-emerald-500' : 'bg-white border-pink-400'} fun-shadow-sm flex flex-col items-center justify-center p-2 text-center">
+                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full ${card.badgeColor} mb-1">${card.displaySub}</span>
+                            <div class="text-lg sm:text-2xl font-extrabold text-slate-900 hindi-font leading-tight">${card.displayMain}</div>
+                            ${isMatched ? '<span class="text-xs text-emerald-600 font-extrabold mt-1">✓ జత కుదిరింది!</span>' : ''}
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(cardEl);
+            });
+        }
+
+        function flipMemoryCard(idx) {
+            if (memoryLockBoard) return;
+            if (memoryFlippedIndices.includes(idx)) return;
+            const card = memoryCardsData[idx];
+            if (memoryMatchedIds.has(card.pairId)) return;
+
+            memoryFlippedIndices.push(idx);
+            renderMemoryGrid();
+
+            if (memoryFlippedIndices.length === 2) {
+                memoryMoves++;
+                document.getElementById('memMovesCount').textContent = memoryMoves;
+                const [firstIdx, secondIdx] = memoryFlippedIndices;
+                const firstCard = memoryCardsData[firstIdx];
+                const secondCard = memoryCardsData[secondIdx];
+
+                if (firstCard.pairId === secondCard.pairId) {
+                    // Match found!
+                    memoryMatchedIds.add(firstCard.pairId);
+                    memoryPairsCompletedTotal++;
+                    memoryFlippedIndices = [];
+                    document.getElementById('memMatchesCount').textContent = memoryMatchedIds.size;
+                    updateStatsBar();
+                    renderMemoryGrid();
+
+                    if (memoryMatchedIds.size === 6) {
+                        document.getElementById('memoryWinBanner').classList.remove('hidden');
+                    }
+                } else {
+                    // Not a match
+                    memoryLockBoard = true;
+                    setTimeout(() => {
+                        memoryFlippedIndices = [];
+                        memoryLockBoard = false;
+                        renderMemoryGrid();
+                    }, 950);
+                }
+            }
+        }
+
+        /********************************************************************
+         * 5. MATCH THE FOLLOWING GAME (HINDI <-> TELUGU)
+         ********************************************************************/
+        let matchRoundItems = [];
+        let matchLeftItems = [];
+        let matchRightItems = [];
+        let selectedLeftId = null;
+        let selectedRightId = null;
+        let matchedSet = new Set();
+        let matchRoundsCompleted = 0;
+
+        function initMatchGame() {
+            selectedLeftId = null;
+            selectedRightId = null;
+            matchedSet.clear();
+            document.getElementById('matchScoreCount').textContent = '0';
+
+            matchRoundItems = shuffleArray(BASIC_HINDI_WORDS).slice(0, 6).map((w, idx) => ({
+                id: idx,
+                hi: w.hi,
+                tePron: w.tePron,
+                teMeaning: w.teMeaning,
+                breakdown: w.breakdown,
+                detail: w.detail
+            }));
+
+            matchLeftItems = shuffleArray([...matchRoundItems]);
+            matchRightItems = shuffleArray([...matchRoundItems]);
+
+            document.getElementById('matchFeedbackBox').className = 'bg-amber-50 border-2 border-amber-300 rounded-2xl p-3.5 text-center text-sm sm:text-base font-bold text-slate-700';
+            document.getElementById('matchFeedbackBox').innerHTML = '👆 జత చేయడానికి ఎడమ వైపు ఒక హిందీ పదాన్ని, కుడి వైపు దాని తెలుగు అర్థాన్ని నొక్కండి!';
+
+            renderMatchColumns();
+        }
+
+        function renderMatchColumns() {
+            const leftCol = document.getElementById('matchLeftCol');
+            const rightCol = document.getElementById('matchRightCol');
+            leftCol.innerHTML = '';
+            rightCol.innerHTML = '';
+
+            matchLeftItems.forEach(item => {
+                const isMatched = matchedSet.has(item.id);
+                const isSelected = (selectedLeftId === item.id);
+                const btn = document.createElement('button');
+                btn.disabled = isMatched;
+
+                let cls = 'w-full p-3.5 rounded-2xl border-4 font-extrabold text-lg sm:text-2xl hindi-font transition flex items-center justify-between ';
+                if (isMatched) {
+                    cls += 'bg-emerald-100 border-emerald-500 text-emerald-900 opacity-80';
+                } else if (isSelected) {
+                    cls += 'bg-indigo-600 border-indigo-800 text-white scale-[1.02] fun-shadow-sm';
+                } else {
+                    cls += 'bg-white hover:bg-indigo-50 border-indigo-200 text-indigo-950 fun-shadow-sm btn-bounce';
+                }
+                btn.className = cls;
+                btn.innerHTML = `
+                    <span>${item.hi}</span>
+                    <span class="text-xs font-sans px-2 py-0.5 rounded-lg ${isMatched ? 'bg-emerald-500 text-white' : 'bg-indigo-100 text-indigo-700'}">
+                        ${isMatched ? '✓ జతయింది' : 'ఎంచుకోండి'}
+                    </span>
+                `;
+                btn.onclick = () => selectMatchSide('left', item.id);
+                leftCol.appendChild(btn);
+            });
+
+            matchRightItems.forEach(item => {
+                const isMatched = matchedSet.has(item.id);
+                const isSelected = (selectedRightId === item.id);
+                const btn = document.createElement('button');
+                btn.disabled = isMatched;
+
+                let cls = 'w-full p-3.5 rounded-2xl border-4 font-extrabold text-sm sm:text-base transition flex items-center justify-between text-left ';
+                if (isMatched) {
+                    cls += 'bg-emerald-100 border-emerald-500 text-emerald-900 opacity-80';
+                } else if (isSelected) {
+                    cls += 'bg-pink-600 border-pink-800 text-white scale-[1.02] fun-shadow-sm';
+                } else {
+                    cls += 'bg-white hover:bg-pink-50 border-pink-200 text-slate-800 fun-shadow-sm btn-bounce';
+                }
+                btn.className = cls;
+                btn.innerHTML = `
+                    <div>
+                        <div class="font-extrabold">${item.tePron}</div>
+                        <div class="text-xs opacity-85">${item.teMeaning}</div>
+                    </div>
+                    ${isMatched ? '<span class="text-emerald-600 font-extrabold text-lg">✓</span>' : ''}
+                `;
+                btn.onclick = () => selectMatchSide('right', item.id);
+                rightCol.appendChild(btn);
+            });
+        }
+
+        function selectMatchSide(side, id) {
+            if (side === 'left') {
+                selectedLeftId = id;
+            } else {
+                selectedRightId = id;
+            }
+            renderMatchColumns();
+
+            if (selectedLeftId !== null && selectedRightId !== null) {
+                const fb = document.getElementById('matchFeedbackBox');
+                if (selectedLeftId === selectedRightId) {
+                    // Correct match!
+                    const matchedItem = matchRoundItems.find(x => x.id === selectedLeftId);
+                    matchedSet.add(selectedLeftId);
+                    matchGamePointsTotal++;
+                    selectedLeftId = null;
+                    selectedRightId = null;
+
+                    document.getElementById('matchScoreCount').textContent = matchedSet.size;
+                    updateStatsBar();
+                    renderMatchColumns();
+
+                    fb.className = 'bg-emerald-100 border-2 border-emerald-400 rounded-2xl p-3.5 text-left text-sm sm:text-base text-emerald-950 animate-pop';
+                    fb.innerHTML = `
+                        <div class="font-extrabold text-emerald-800 mb-1">🎉 అద్భుతం! సరైన జత: ${matchedItem.breakdown}</div>
+                        <div class="text-xs sm:text-sm font-medium">${matchedItem.detail}</div>
+                    `;
+
+                    if (matchedSet.size === 6) {
+                        matchRoundsCompleted++;
+                        document.getElementById('matchRoundsWon').textContent = matchRoundsCompleted;
+                    }
+                } else {
+                    // Wrong match
+                    fb.className = 'bg-rose-100 border-2 border-rose-400 rounded-2xl p-3.5 text-center text-sm sm:text-base font-extrabold text-rose-900 animate-pop';
+                    fb.innerHTML = '❌ ఆ రెండూ సరైన జత కాదు! మళ్ళీ ప్రయత్నించండి.';
+                    setTimeout(() => {
+                        selectedLeftId = null;
+                        selectedRightId = null;
+                        renderMatchColumns();
+                    }, 700);
+                }
+            }
+        }
+
+        /********************************************************************
+         * 6. FORMSPREE SUBMISSION & EMAIL REPORT (https://formspree.io/f/xqppgkaw)
+         ********************************************************************/
+        function buildResultsPayload() {
+            const total = questions.length;
+            const attemptedKeys = Object.keys(userAttempts);
+            const attempted = attemptedKeys.length;
+            const notAttempted = total - attempted;
+            const correct = attemptedKeys.filter(k => userAttempts[k].isCorrect).length;
+            const wrong = attempted - correct;
+            const accuracy = attempted > 0 ? `${Math.round((correct / attempted) * 100)}%` : '0%';
+            const studentName = document.getElementById('studentNameInput').value.trim() || 'Student (పేరు రాయలేదు)';
+            const screenTimeFormatted = formatTime(elapsedSeconds);
+
+            return {
+                _subject: `Hindi Guninthalu Telugu App Report - ${studentName}`,
+                target_recipient_email: 'balaswamysm@gmail.com',
+                email: 'balaswamysm@gmail.com',
+                student_name: studentName,
+                total_questions: total,
+                questions_attempted: attempted,
+                questions_not_attempted: notAttempted,
+                correct_answers: correct,
+                wrong_answers: wrong,
+                accuracy_percentage: accuracy,
+                screen_timing: screenTimeFormatted,
+                screen_timing_seconds: elapsedSeconds,
+                memory_game_pairs_matched: memoryPairsCompletedTotal,
+                match_following_score: matchGamePointsTotal,
+                submitted_at: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+                message: `హిందీ గుణింతాలు ఫలితాలు (Results for balaswamysm@gmail.com):\n` +
+                         `విద్యార్థి పేరు: ${studentName}\n` +
+                         `మొత్తం ప్రశ్నలు (Total): ${total}\n` +
+                         `ప్రయత్నించినవి (Attempted): ${attempted}\n` +
+                         `ప్రయత్నించనివి (Not Attempted): ${notAttempted}\n` +
+                         `సరైన సమాధానాలు (Correct): ${correct}\n` +
+                         `తప్పు సమాధానాలు (Wrong): ${wrong}\n` +
+                         `స్క్రీన్ సమయం (Screen Timing): ${screenTimeFormatted}`
+            };
+        }
+
+        async function submitResultsToFormspree(isAutoTrigger = false) {
+            const banner = document.getElementById('formspreeStatusBanner');
+            const sendBtn = document.getElementById('btnSendFormspree');
+            const payload = buildResultsPayload();
+
+            banner.classList.remove('hidden');
+            banner.className = 'rounded-2xl p-3.5 text-sm font-extrabold bg-blue-100 text-blue-900 border-2 border-blue-300';
+            banner.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i>ఫలితాలను Formspree (balaswamysm@gmail.com) కు పంపుతున్నాము... దయచేసి వేచి ఉండండి...`;
+
+            if (sendBtn) sendBtn.disabled = true;
+
+            try {
+                const response = await fetch('https://formspree.io/f/xqppgkaw', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    banner.className = 'rounded-2xl p-3.5 text-sm font-extrabold bg-emerald-100 text-emerald-900 border-2 border-emerald-400';
+                    banner.innerHTML = `✅ అభినందనలు! మీ ఫలితాలు (Attempted: ${payload.questions_attempted}, Not Attempted: ${payload.questions_not_attempted}, Correct: ${payload.correct_answers}, Time: ${payload.screen_timing}) విజయవంతంగా <b>https://formspree.io/f/xqppgkaw</b> (balaswamysm@gmail.com) కు పంపబడ్డాయి!`;
+                } else {
+                    throw new Error('Formspree returned non-OK status');
+                }
+            } catch (err) {
+                banner.className = 'rounded-2xl p-3.5 text-sm font-extrabold bg-amber-100 text-amber-900 border-2 border-amber-400';
+                banner.innerHTML = `⚠️ నెట్‌వర్క్ లేదా Formspree సెట్టింగ్ వల్ల నేరుగా పంపడంలో ఆలస్యమైంది. మీరు క్రింది <b>"Direct Email (balaswamysm@gmail.com)"</b> బటన్ నొక్కి కూడా ఇమెయిల్ పంపవచ్చు.`;
+            } finally {
+                if (sendBtn) sendBtn.disabled = false;
+            }
+        }
+
+        function sendDirectMailtoFallback() {
+            const payload = buildResultsPayload();
+            const subject = encodeURIComponent(payload._subject);
+            const body = encodeURIComponent(payload.message);
+            window.location.href = `mailto:balaswamysm@gmail.com?subject=${subject}&body=${body}`;
+        }
+
+        /********************************************************************
+         * 7. TABS & REFERENCE CHART MODAL
+         ********************************************************************/
+        function switchTab(tabName) {
+            const tabs = ['quiz', 'memory', 'match', 'results'];
+            tabs.forEach(t => {
+                const sec = document.getElementById(`section-${t}`);
+                const btn = document.getElementById(`tabBtn-${t}`);
+                if (t === tabName) {
+                    sec.classList.remove('hidden');
+                    btn.className = 'tab-btn bg-indigo-600 text-white font-extrabold py-3 px-3 rounded-2xl fun-shadow btn-bounce flex items-center justify-center gap-2 border-2 border-indigo-700 text-sm sm:text-base';
+                } else {
+                    sec.classList.add('hidden');
+                    btn.className = 'tab-btn bg-white text-slate-700 hover:bg-amber-50 font-extrabold py-3 px-3 rounded-2xl fun-shadow btn-bounce flex items-center justify-center gap-2 border-2 border-slate-200 text-sm sm:text-base';
+                }
+            });
+
+            updateStatsBar();
+
+            if (tabName === 'results' && !hasAutoSubmittedOnResults) {
+                hasAutoSubmittedOnResults = true;
+                submitResultsToFormspree(true);
+            }
+        }
+
+        function populateChartModal() {
+            const grid = document.getElementById('chartModalGrid');
+            const kaForms = makeTeluguForms('క');
+            grid.innerHTML = MATRAS.map(m => `
+                <div class="bg-indigo-50 border-2 border-indigo-200 rounded-2xl p-3">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-xs font-extrabold bg-indigo-600 text-white px-2 py-0.5 rounded-lg">${m.vowelHi} (${m.teluguVowel})</span>
+                        <span class="text-xs font-bold text-pink-700">${m.teluguSignName}</span>
+                    </div>
+                    <div class="text-2xl font-extrabold text-indigo-950 hindi-font my-1">
+                        क + ${m.matraHi || 'अ'} = ${'क' + m.matraHi} (${m.modFn(kaForms)})
+                    </div>
+                    <p class="text-xs text-slate-600 leading-snug">${m.combineRuleTe}</p>
+                </div>
+            `).join('');
+        }
+
+        function openChartModal() {
+            document.getElementById('chartModal').classList.remove('hidden');
+        }
+
+        function closeChartModal() {
+            document.getElementById('chartModal').classList.add('hidden');
+        }
+
+        /********************************************************************
+         * 8. INITIALIZATION ON WINDOW LOAD
+         ********************************************************************/
+        window.onload = function () {
+            questions = generateAllQuestions();
+            currentQIndex = 0;
+            userAttempts = {};
+
+            updateStatsBar();
+            renderCurrentQuestion();
+            initMemoryGame();
+            initMatchGame();
+            populateChartModal();
+            startLiveScreenTimer();
+        };
+    </script>
+</body>
+</html>
